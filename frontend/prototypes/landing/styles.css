@@ -359,3 +359,77 @@ a:focus-visible,
 .footer__link {
   color: var(--cm-text-muted);
 }
+
+/* ---------- 4. Breakpoints ---------- */
+
+/* Tablet: ab 768px */
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--cm-space-l);
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .hero__title {
+    font-size: 2.75rem;
+  }
+
+  .hero__actions {
+    flex-direction: row;
+  }
+
+  /* 2 Spalten */
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop: ab 992px */
+@media (min-width: 992px) {
+  /* Burger weg, Navigation immer sichtbar in einer Zeile */
+  .nav-toggle__button {
+    display: none;
+  }
+
+  .nav {
+    display: block;
+    width: auto;
+    padding-bottom: 0;
+  }
+
+  .nav__list {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--cm-space-l);
+  }
+
+  .nav__login {
+    margin-top: 0;
+  }
+
+  .hero {
+    padding-block: var(--cm-space-xxl);
+  }
+
+  .hero__inner {
+    grid-template-columns: 3fr 2fr;
+  }
+
+  .hero__title {
+    font-size: 3.25rem;
+  }
+
+  /* 3 Spalten */
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
