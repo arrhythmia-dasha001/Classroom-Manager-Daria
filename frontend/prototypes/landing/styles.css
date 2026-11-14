@@ -396,6 +396,7 @@ a:focus-visible,
 /* Desktop: ab 992px */
 @media (min-width: 992px) {
   /* Burger weg, Navigation immer sichtbar in einer Zeile */
+  .nav-toggle,
   .nav-toggle__button {
     display: none;
   }

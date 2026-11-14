@@ -22,9 +22,14 @@ nach dem Wireframe [`docs/wireframes/uw1-landingpage.jpg`](../../../docs/wirefra
 
 ## Lighthouse
 
-Chrome → F12 → Tab **Lighthouse** → Kategorie „Best Practices“ → *Analyze page load*.
+Seite über Live Server öffnen (`http://127.0.0.1:5500/...`, nicht `file://`) → F12 → Tab **Lighthouse** → *Analyze page load*.
 
-| Kategorie | Score |
-|---|---|
-| Best Practices | _(eintragen)_ |
-| Accessibility | _(eintragen)_ |
+Messung vom 14.11.2026:
+
+| Kategorie | Mobile | Desktop | Ziel |
+|---|---|---|---|
+| Best Practices | **96** ✅ | **96** ✅ | ≥ 90 |
+| Accessibility | **100** ✅ | **100** | ≥ 90 |
+
+Hinweis Desktop-Accessibility: *„Form elements do not have associated labels“* – auf dem Desktop ist der
+Burger-Button (`<label>`) ausgeblendet, die unsichtbare Checkbox aber noch vorhanden und damit ohne Beschriftung.
