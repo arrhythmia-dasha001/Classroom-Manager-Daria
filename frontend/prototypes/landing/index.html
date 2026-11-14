@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Classroom-Manager der BBS 2 Leer: Klassen, Anwesenheiten und Kursbuch an einem Ort verwalten.">
+  <title>Classroom-Manager · BBS 2 Leer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== Header mit Logo und Navigation ===== -->
+  <header class="header">
+    <div class="header__inner container">
+      <a class="logo" href="#top">
+        <span class="logo__mark" aria-hidden="true">CM</span>
+        <span class="logo__text">Classroom-Manager</span>
+      </a>
+
+      <!-- Burger-Menü ohne JavaScript (Checkbox-Trick). Ab UW4 ersetzen wir das durch JS. -->
+      <input class="nav-toggle" type="checkbox" id="nav-toggle">
+      <label class="nav-toggle__button" for="nav-toggle">
+        <span class="visually-hidden">Menü öffnen oder schließen</span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+      </label>
+
+      <nav class="nav" aria-label="Hauptnavigation">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#anwesenheiten">Anwesenheiten</a></li>
+          <li><a class="nav__link" href="#klassen">Klassen</a></li>
+          <li><a class="nav__link" href="#kursbuch">Kursbuch</a></li>
+          <li><a class="nav__link" href="#hilfe">Hilfe</a></li>
+          <li><a class="button button--outline nav__login" href="#anmelden">Anmelden</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== Hero: Titel, Kurzbeschreibung, Buttons, Bild ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner container">
+        <div class="hero__content">
+          <h1 class="hero__title" id="hero-title">Classroom-Manager</h1>
+          <p class="hero__text">
+            Klassen, Anwesenheiten und Kursbuch der BBS&nbsp;2&nbsp;Leer an einem Ort –
+            übersichtlich auf dem PC, Tablet und Smartphone.
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#anmelden">Jetzt anmelden</a>
+            <a class="button button--outline" href="#schnellzugriff">Mehr erfahren</a>
+          </div>
+        </div>
+
+        <!-- Platzhalter-Illustration (wie das Bild-Kästchen im Wireframe) -->
+        <figure class="hero__media">
+          <svg class="hero__image" viewBox="0 0 320 200" role="img" aria-labelledby="hero-img-title">
+            <title id="hero-img-title">Skizze einer Dashboard-Ansicht mit Klassenliste</title>
+            <rect x="1" y="1" width="318" height="198" rx="12" class="svg-frame"/>
+            <rect x="1" y="1" width="318" height="32" rx="12" class="svg-bar"/>
+            <circle cx="20" cy="17" r="5" class="svg-dot"/>
+            <circle cx="36" cy="17" r="5" class="svg-dot"/>
+            <rect x="20" y="52" width="120" height="12" rx="6" class="svg-line"/>
+            <rect x="20" y="80" width="280" height="22" rx="6" class="svg-row"/>
+            <rect x="20" y="110" width="280" height="22" rx="6" class="svg-row"/>
+            <rect x="20" y="140" width="280" height="22" rx="6" class="svg-row"/>
+            <rect x="240" y="85" width="50" height="12" rx="6" class="svg-badge"/>
+            <rect x="240" y="115" width="50" height="12" rx="6" class="svg-badge"/>
+            <rect x="240" y="145" width="50" height="12" rx="6" class="svg-badge svg-badge--warn"/>
+          </svg>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== Schnellzugriff: drei Info-Karten ===== -->
+    <section class="quick" id="schnellzugriff" aria-labelledby="quick-title">
+      <div class="container">
+        <h2 class="quick__title" id="quick-title">Schnellzugriff</h2>
+
+        <ul class="cards">
+          <li class="card" id="klassen">
+            <span class="card__icon" aria-hidden="true">👥</span>
+            <h3 class="card__title">Klassen</h3>
+            <p class="card__text">Alle Klassen und Schüler:innen auf einen Blick – mit Klassenlisten und Kontaktdaten.</p>
+            <a class="card__link" href="#klassen">Zu den Klassen <span aria-hidden="true">→</span></a>
+          </li>
+
+          <li class="card" id="anwesenheiten">
+            <span class="card__icon" aria-hidden="true">✅</span>
+            <h3 class="card__title">Anwesenheiten</h3>
+            <p class="card__text">An- und Abwesenheit, Verspätungen und Entschuldigungen schnell erfassen.</p>
+            <a class="card__link" href="#anwesenheiten">Zu den Anwesenheiten <span aria-hidden="true">→</span></a>
+          </li>
+
+          <li class="card" id="kursbuch">
+            <span class="card__icon" aria-hidden="true">📘</span>
+            <h3 class="card__title">Kursbuch</h3>
+            <p class="card__text">Themen, Lernfelder und Hausaufgaben pro Unterrichtsstunde dokumentieren.</p>
+            <a class="card__link" href="#kursbuch">Zum Kursbuch <span aria-hidden="true">→</span></a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer__inner container">
+      <p class="footer__text">© 2026 Classroom-Manager · BBS 2 Leer</p>
+      <ul class="footer__links">
+        <li><a class="footer__link" href="#impressum">Impressum</a></li>
+        <li><a class="footer__link" href="#datenschutz">Datenschutz</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
