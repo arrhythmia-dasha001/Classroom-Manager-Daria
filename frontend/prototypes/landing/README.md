@@ -29,5 +29,5 @@ Messung vom 14.11.2026:
 | Kategorie | Mobile | Desktop | Ziel |
 |---|---|---|---|
 | Best Practices | **96** ✅ | **96** ✅ | ≥ 90 |
-| Accessibility | **100** ✅ | **100** | ≥ 90 |
+| Accessibility | **100** ✅ | **100**✅ | ≥ 90 |
 
