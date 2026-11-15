@@ -1,0 +1,118 @@
+/* =========================================================
+   components.css – WIE sehen die Bausteine aus? (BEM)
+   Logo, Button, Schülerkarte, Badge.
+   Bausteine kennen ihren Platz auf der Seite nicht – das regelt layout.css.
+   ========================================================= */
+
+/* ---------- Logo ---------- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--cm-space-s);
+  color: var(--cm-text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.logo__mark {
+  display: grid;
+  place-items: center;
+  width: 2.5rem; /* feste Größe → kein Layout-Shift */
+  height: 2.5rem;
+  border-radius: var(--cm-radius);
+  background: var(--cm-primary);
+  color: #fff;
+}
+
+/* ---------- Button ---------- */
+.button {
+  display: inline-block;
+  padding: var(--cm-space-s) var(--cm-space-l);
+  border: 2px solid var(--cm-primary);
+  border-radius: var(--cm-radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.button--outline {
+  background: transparent;
+  color: var(--cm-primary);
+}
+
+.button--outline:hover {
+  background: var(--cm-primary);
+  color: #fff;
+}
+
+/* ---------- Schülerkarte ---------- */
+
+/* Das li ist der „Container“ für die Container Query weiter unten:
+   die Karte reagiert auf IHRE EIGENE Breite, nicht auf die Fensterbreite. */
+.student-grid__item {
+  container-type: inline-size;
+}
+
+.student {
+  display: flex;
+  flex-direction: column; /* schmale Karte: Avatar über dem Text */
+  align-items: flex-start;
+  gap: var(--cm-space-m);
+  height: 100%; /* alle Karten einer Grid-Zeile gleich hoch */
+  padding: var(--cm-space-l);
+  background: var(--cm-bg);
+  border: 1px solid var(--cm-border);
+  border-radius: var(--cm-radius);
+  box-shadow: var(--cm-shadow);
+}
+
+/* Kreis mit Initialen statt Foto: feste Größe → kein Layout-Shift (CLS),
+   kein Bild zum Nachladen, kein Datenschutzproblem mit echten Fotos */
+.student__avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0; /* im Flex-Layout nicht zusammendrücken */
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--cm-bg-soft);
+  color: var(--cm-primary-dark);
+  font-weight: 700;
+}
+
+.student__name {
+  font-size: 1.125rem;
+}
+
+.student__class,
+.student__attendance {
+  color: var(--cm-text-muted);
+  font-size: 0.9375rem;
+}
+
+/* Container Query (Bonus „Fortgeschritten“):
+   Ist die KARTE mindestens 20rem breit, stehen Avatar und Text nebeneinander. */
+@container (min-width: 20rem) {
+  .student {
+    flex-direction: row;
+  }
+}
+
+/* ---------- Badge (Status-Etikett) ---------- */
+.badge {
+  display: inline-block;
+  padding: var(--cm-space-xs) var(--cm-space-s);
+  border-radius: 999px; /* sehr großer Radius = Pillenform */
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.badge--ok {
+  background: var(--cm-success-bg);
+  color: var(--cm-success);
+}
+
+.badge--warning {
+  background: var(--cm-warning-bg);
+  color: var(--cm-warning);
+}
