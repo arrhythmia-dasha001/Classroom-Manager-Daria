@@ -25,8 +25,8 @@ die Schüler:innen, bei denen Fehlzeiten falsch gezählt werden können.
 
 ## 2. Sichtweise definieren – Point of View
 
-**Point of View:** Eine Klassenlehrerin braucht alle Daten ihrer Klassen übersichtlich an einem Ort, weil sie heute
-zwischen Papierlisten und mehreren Excel-Dateien wechseln muss und dadurch Zeit verliert und Fehler macht.
+**Point of View:** Ein Klassenlehrer wie Paul Wagner braucht alle Daten seiner Klassen übersichtlich an einem Ort, weil
+er heute zwischen Papierlisten und mehreren Excel-Dateien wechseln muss und dadurch Zeit verliert und Fehler macht.
 
 ## 3. Ideen finden – Lösungsansätze im Classroom-Manager
 
