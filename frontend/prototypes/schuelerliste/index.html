@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Ohne diese Zeile zeigt das Handy die Seite verkleinert wie am Desktop an – Media Queries würden nicht greifen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Schülerübersicht des Classroom-Managers der BBS 2 Leer" />
+    <title>Schülerübersicht · Classroom-Manager</title>
+
+    <!-- Modulares CSS: Reihenfolge ist wichtig (Kaskade) – erst Grundlagen, dann Layout, dann Bausteine -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header__inner">
+        <a class="logo" href="../landing/index.html">
+          <span class="logo__mark" aria-hidden="true">CM</span>
+          <span class="logo__text">Classroom-Manager</span>
+        </a>
+        <a class="button button--outline" href="../landing/index.html">Zur Startseite</a>
+      </div>
+    </header>
+
+    <main class="container page">
+      <h1 class="page__title">Schülerübersicht</h1>
+      <p class="page__intro">
+        Alle Schüler:innen der Klassen FI24A und FI24B mit aktueller Anwesenheitsquote.
+      </p>
+
+      <!-- Die "Produktliste": eine Liste von Karten. ul/li, weil es inhaltlich eine Aufzählung ist -->
+      <ul class="student-grid" aria-label="Schülerinnen und Schüler">
+        <li class="student-grid__item">
+          <article class="student">
+            <span class="student__avatar" aria-hidden="true">MM</span>
+            <div class="student__body">
+              <h2 class="student__name">Max Mustermann</h2>
+              <p class="student__class">Klasse FI24A</p>
+              <p class="student__attendance">Anwesenheit: 96&nbsp;%</p>
+              <span class="badge badge--ok">unauffällig</span>
+            </div>
+          </article>
+        </li>
+        <li class="student-grid__item">
+          <article class="student">
+            <span class="student__avatar" aria-hidden="true">EM</span>
+            <div class="student__body">
+              <h2 class="student__name">Erika Mustermann</h2>
+              <p class="student__class">Klasse FI24A</p>
+              <p class="student__attendance">Anwesenheit: 99&nbsp;%</p>
+              <span class="badge badge--ok">unauffällig</span>
+            </div>
+          </article>
+        </li>
+        <li class="student-grid__item">
+          <article class="student">
+            <span class="student__avatar" aria-hidden="true">JD</span>
+            <div class="student__body">
+              <h2 class="student__name">John Doe</h2>
+              <p class="student__class">Klasse FI24B</p>
+              <p class="student__attendance">Anwesenheit: 81&nbsp;%</p>
+              <span class="badge badge--warning">Fehlzeiten prüfen</span>
+            </div>
+          </article>
+        </li>
+        <li class="student-grid__item">
+          <article class="student">
+            <span class="student__avatar" aria-hidden="true">LS</span>
+            <div class="student__body">
+              <h2 class="student__name">Lena Schulz</h2>
+              <p class="student__class">Klasse FI24A</p>
+              <p class="student__attendance">Anwesenheit: 93&nbsp;%</p>
+              <span class="badge badge--ok">unauffällig</span>
+            </div>
+          </article>
+        </li>
+        <li class="student-grid__item">
+          <article class="student">
+            <span class="student__avatar" aria-hidden="true">MY</span>
+            <div class="student__body">
+              <h2 class="student__name">Mehmet Yılmaz</h2>
+              <p class="student__class">Klasse FI24A</p>
+              <p class="student__attendance">Anwesenheit: 88&nbsp;%</p>
+              <span class="badge badge--ok">unauffällig</span>
+            </div>
+          </article>
+        </li>
+        <li class="student-grid__item">
+          <article class="student">
+            <span class="student__avatar" aria-hidden="true">SB</span>
+            <div class="student__body">
+              <h2 class="student__name">Sophie Becker</h2>
+              <p class="student__class">Klasse FI24B</p>
+              <p class="student__attendance">Anwesenheit: 97&nbsp;%</p>
+              <span class="badge badge--ok">unauffällig</span>
+            </div>
+          </article>
+        </li>
+        <li class="student-grid__item">
+          <article class="student">
+            <span class="student__avatar" aria-hidden="true">TH</span>
+            <div class="student__body">
+              <h2 class="student__name">Tim Hoffmann</h2>
+              <p class="student__class">Klasse FI24A</p>
+              <p class="student__attendance">Anwesenheit: 78&nbsp;%</p>
+              <span class="badge badge--warning">Fehlzeiten prüfen</span>
+            </div>
+          </article>
+        </li>
+        <li class="student-grid__item">
+          <article class="student">
+            <span class="student__avatar" aria-hidden="true">AK</span>
+            <div class="student__body">
+              <h2 class="student__name">Anna Kowalski</h2>
+              <p class="student__class">Klasse FI24B</p>
+              <p class="student__attendance">Anwesenheit: 95&nbsp;%</p>
+              <span class="badge badge--ok">unauffällig</span>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 Classroom-Manager · BBS 2 Leer</p>
+      </div>
+    </footer>
+  </body>
+</html>

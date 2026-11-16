@@ -1,0 +1,101 @@
+/* =========================================================
+   layout.css – WO steht WAS auf der Seite?
+   Header, Seitenbereich, Footer und das responsive Grid.
+   Mobile First: Die Regeln OHNE Media Query gelten fürs Handy,
+   jede Media Query ergänzt etwas für breitere Bildschirme.
+
+   Breakpoints (wie in Bootstrap, das wir später in React nutzen):
+     < 576px    Handy        → 1 Spalte
+     ≥ 576px    großes Handy → 2 Spalten
+     ≥ 768px    Tablet       → 3 Spalten, Header in einer Zeile
+     ≥ 1200px   Desktop      → 4 Spalten
+   ========================================================= */
+
+/* ---------- Header ---------- */
+.header {
+  background: var(--cm-bg);
+  border-bottom: 1px solid var(--cm-border);
+}
+
+/* Handy: Logo und Button untereinander */
+.header__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--cm-space-s);
+  padding-block: var(--cm-space-m);
+}
+
+/* ---------- Seitenbereich ---------- */
+.page {
+  padding-block: var(--cm-space-l) var(--cm-space-xl);
+}
+
+/* clamp(MIN, BEVORZUGT, MAX): Schrift wächst fließend mit der Fensterbreite,
+   wird aber nie kleiner als 1.75rem und nie größer als 2.5rem (Bonus „Fortgeschritten“) */
+.page__title {
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+}
+
+.page__intro {
+  color: var(--cm-text-muted);
+  margin-bottom: var(--cm-space-l);
+}
+
+/* ---------- Responsives Grid (Kern der Aufgabe) ---------- */
+.student-grid {
+  /* ul ohne Aufzählungspunkte und ohne Standard-Einrückung */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: grid;
+  grid-template-columns: 1fr; /* Handy: 1 Spalte */
+  gap: var(--cm-space-m); /* Abstand zwischen den Karten (Zeilen UND Spalten) */
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  border-top: 1px solid var(--cm-border);
+  background: var(--cm-bg);
+  color: var(--cm-text-muted);
+  font-size: 0.875rem;
+  padding-block: var(--cm-space-m);
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* =========================================================
+   Breakpoints
+   ========================================================= */
+
+/* Breakpoint 1 – großes Handy / kleines Tablet hochkant */
+@media (min-width: 576px) {
+  .student-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Breakpoint 2 – Tablet */
+@media (min-width: 768px) {
+  /* Header: Logo links, Button rechts in einer Zeile */
+  .header__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .student-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--cm-space-l);
+  }
+}
+
+/* Breakpoint 3 – Desktop */
+@media (min-width: 1200px) {
+  .student-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
