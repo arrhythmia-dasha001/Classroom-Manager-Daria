@@ -43,9 +43,9 @@ Auffälligkeiten:
 
 ## AXE DevTools
 
-Datum: TT.MM.2026
+Datum: 16.11.2026
 
 | Seite | Kritisch | Ernst | Mittel | Gering |
 |---|---|---|---|---|
-| `index.html` | … | … | … | … |
-| `index.html` nach Absenden (mit Fehlern) | … | … | … | … |
+| `index.html` | 0 | 0 | 0 | 0 |
+| `index.html` nach Absenden (mit Fehlern) | 0 | 0 | 0 | 0 |
