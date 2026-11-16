@@ -1,0 +1,33 @@
+/* focus.css – Styleguide für Fokus-States
+   Regeln:
+   1. Jedes bedienbare Element hat einen sichtbaren Fokus (nie outline: none ohne Ersatz).
+   2. Überall gleicher Stil: 3px blaue Linie mit 2px Abstand.
+   3. :focus-visible statt :focus → Rahmen bei Tastatur, nicht bei jedem Mausklick.
+   4. Kontrast der Fokus-Linie zum Hintergrund mind. 3:1. */
+
+:root {
+  --cm-focus-color: #0a58ca;
+  --cm-focus-width: 3px;
+  --cm-focus-offset: 2px;
+}
+
+/* Links und Buttons */
+a:focus-visible,
+button:focus-visible {
+  outline: var(--cm-focus-width) solid var(--cm-focus-color);
+  outline-offset: var(--cm-focus-offset);
+}
+
+/* Eingabefelder: zusätzlich Rahmenfarbe ändern */
+input:focus-visible,
+select:focus-visible {
+  outline: var(--cm-focus-width) solid var(--cm-focus-color);
+  outline-offset: var(--cm-focus-offset);
+  border-color: var(--cm-focus-color);
+}
+
+/* Fehlerübersicht bekommt den Fokus per JS → auch sichtbar machen */
+.error-summary:focus {
+  outline: var(--cm-focus-width) solid var(--cm-error);
+  outline-offset: var(--cm-focus-offset);
+}

@@ -1,0 +1,87 @@
+/* base.css – Variablen, Grundeinstellungen, Hilfsklassen */
+
+:root {
+  --cm-primary: #0d6efd;
+  --cm-primary-dark: #0a58ca;
+  --cm-text: #1f2937;
+  --cm-text-muted: #4b5563;
+  --cm-bg: #ffffff;
+  --cm-bg-soft: #f3f6fb;
+  --cm-border: #6b7280; /* dunkler als sonst: Feldrahmen brauchen Kontrast 3:1 */
+  --cm-error: #b02a37;
+  --cm-error-bg: #f8d7da;
+  --cm-success: #146c43;
+  --cm-success-bg: #d1e7dd;
+
+  --cm-space-s: 0.5rem;
+  --cm-space-m: 1rem;
+  --cm-space-l: 1.5rem;
+  --cm-radius: 0.5rem;
+  --cm-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--cm-font);
+  line-height: 1.6;
+  color: var(--cm-text);
+  background: var(--cm-bg-soft);
+}
+
+.container {
+  width: 100%;
+  max-width: 36rem; /* Formulare nicht zu breit → besser lesbar */
+  margin-inline: auto;
+  padding-inline: var(--cm-space-m);
+}
+
+.header {
+  background: var(--cm-bg);
+  border-bottom: 1px solid #d6dce5;
+  padding-block: var(--cm-space-m);
+}
+
+.logo {
+  color: var(--cm-text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.page {
+  padding-block: var(--cm-space-l);
+}
+
+a {
+  color: var(--cm-primary-dark);
+}
+
+/* Nur für Screenreader sichtbar */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Skip-Link: versteckt, erscheint erst beim Fokus mit Tab */
+.skip-link {
+  position: absolute;
+  left: var(--cm-space-m);
+  top: -4rem;
+  padding: var(--cm-space-s) var(--cm-space-m);
+  background: var(--cm-text);
+  color: #fff;
+  z-index: 10;
+}
+
+.skip-link:focus {
+  top: var(--cm-space-m);
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registrierung · Classroom-Manager</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/focus.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <!-- defer: Skript wird erst ausgeführt, wenn das HTML fertig geladen ist -->
+    <script src="js/validation.js" defer></script>
+  </head>
+  <body>
+    <!-- Skip-Link: erstes Element beim Tabben, springt direkt zum Formular -->
+    <a class="skip-link" href="#registrierung">Zum Formular springen</a>
+
+    <header class="header">
+      <div class="container">
+        <a class="logo" href="../landing/index.html">Classroom-Manager</a>
+      </div>
+    </header>
+
+    <main class="container page">
+      <h1>Registrierung</h1>
+      <p>Felder mit <span aria-hidden="true">*</span><span class="visually-hidden">Stern</span> sind Pflichtfelder.</p>
+
+      <!-- Fehlerübersicht (Error Summary). role="alert" = Live-Region:
+           Screenreader lesen den Inhalt vor, sobald er sich ändert. Am Anfang leer und versteckt. -->
+      <div id="error-summary" class="error-summary" role="alert" tabindex="-1" hidden></div>
+
+      <!-- Live-Region für Erfolgsmeldungen (polite = wartet, bis der Screenreader fertig ist) -->
+      <p id="form-status" class="form-status" aria-live="polite"></p>
+
+      <form id="registrierung" class="form" action="#" method="post">
+        <div class="field">
+          <label class="field__label" for="vorname">Vorname *</label>
+          <input class="field__input" id="vorname" name="vorname" type="text" autocomplete="given-name" required />
+          <p class="field__error" id="vorname-error"></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="nachname">Nachname *</label>
+          <input class="field__input" id="nachname" name="nachname" type="text" autocomplete="family-name" required />
+          <p class="field__error" id="nachname-error"></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="email">E-Mail *</label>
+          <!-- aria-describedby verknüpft den Hinweis mit dem Feld → wird beim Fokus vorgelesen -->
+          <input class="field__input" id="email" name="email" type="email" autocomplete="email" required
+                 aria-describedby="email-hint" />
+          <p class="field__hint" id="email-hint">Zum Beispiel: max.mustermann@bbs2leer.de</p>
+          <p class="field__error" id="email-error"></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="klasse">Klasse *</label>
+          <select class="field__input" id="klasse" name="klasse" required>
+            <option value="">Bitte auswählen</option>
+            <option>FI24A</option>
+            <option>FI24B</option>
+          </select>
+          <p class="field__error" id="klasse-error"></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="passwort">Passwort *</label>
+          <input class="field__input" id="passwort" name="passwort" type="password" autocomplete="new-password"
+                 minlength="8" required aria-describedby="passwort-hint" />
+          <p class="field__hint" id="passwort-hint">Mindestens 8 Zeichen.</p>
+          <p class="field__error" id="passwort-error"></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="passwort2">Passwort wiederholen *</label>
+          <input class="field__input" id="passwort2" name="passwort2" type="password" autocomplete="new-password"
+                 required />
+          <p class="field__error" id="passwort2-error"></p>
+        </div>
+
+        <div class="field field--checkbox">
+          <input class="field__checkbox" id="datenschutz" name="datenschutz" type="checkbox" required />
+          <label for="datenschutz">Ich akzeptiere die <a href="#">Datenschutzerklärung</a>. *</label>
+          <p class="field__error" id="datenschutz-error"></p>
+        </div>
+
+        <button class="button" type="submit">Registrieren</button>
+      </form>
+    </main>
+  </body>
+</html>
