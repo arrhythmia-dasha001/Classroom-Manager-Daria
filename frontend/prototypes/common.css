@@ -1,0 +1,323 @@
+/* =========================================================
+   common.css – alles, was in JEDER Web-Applikation des Classroom-Managers gleich ist.
+   Zusammen mit tokens.css: Stil einmal hier ändern → überall geändert.
+   Reihenfolge in jeder Seite:
+     1. ../tokens.css      Design-Tokens
+     2. ../common.css      diese Datei
+     3. css/layout.css     WO steht WAS auf dieser Seite
+     4. css/components.css WIE sehen die Bausteine dieser Seite aus
+   Aufbau: 1. Basis  2. Fokus  3. Container  4. Button
+           5. Header + Navigation  6. Footer  7. Breakpoints
+   ========================================================= */
+
+/* ---------- 1. Basis ---------- */
+
+/* width/height sollen Rahmen und Innenabstand mit einschließen */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Platz für die Scrollbar immer freihalten.
+   Sonst rutscht alles ein Stück zur Seite, wenn eine Seite kürzer ist und keine Scrollbar hat. */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Footer immer unten, auch wenn die Seite wenig Inhalt hat */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+main {
+  flex: 1;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 var(--space-m);
+  line-height: var(--line-height-heading);
+}
+
+p {
+  margin: 0 0 var(--space-m);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+/* Text nur für Screenreader, unsichtbar auf dem Bildschirm */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- 2. Fokus (Styleguide aus LF10A UW3) ----------
+   1. Jedes bedienbare Element hat einen sichtbaren Fokus (nie outline: none ohne Ersatz).
+   2. Überall gleicher Stil: 3px Linie mit 2px Abstand.
+   3. :focus-visible statt :focus → Rahmen bei Tastatur, nicht bei jedem Mausklick.
+   4. Kontrast der Fokus-Linie zum Hintergrund mind. 3:1. */
+a:focus-visible,
+button:focus-visible,
+.nav-toggle:focus-visible + .nav-toggle__button {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+}
+
+/* Eingabefelder: zusätzlich Rahmenfarbe ändern */
+input:focus-visible,
+select:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+  border-color: var(--color-focus);
+}
+
+/* ---------- 3. Container ---------- */
+
+/* Zentrierter Inhaltsbereich, auf allen Seiten gleich breit */
+.container {
+  width: 100%;
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-inline: var(--space-m);
+}
+
+/* ---------- 4. Button ---------- */
+.button {
+  display: inline-block;
+  padding: var(--space-s) var(--space-l);
+  font: inherit;
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.button--primary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.button--primary:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.button--outline {
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.button--outline:hover,
+.button--outline[aria-current="page"] {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+/* ---------- 5. Header + Navigation ---------- */
+.header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 4rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  color: var(--color-text);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+}
+
+.logo__mark {
+  display: grid;
+  place-items: center;
+  width: 2.5rem; /* feste Größe → kein Layout-Shift */
+  height: 2.5rem;
+  border-radius: var(--radius-m);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: var(--font-size-s);
+}
+
+/* Burger-Menü: Checkbox ist unsichtbar, das Label ist der Button */
+.nav-toggle {
+  position: absolute;
+  opacity: 0;
+}
+
+.nav-toggle__button {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  cursor: pointer;
+}
+
+/* Drei Striche aus einem Element + ::before/::after */
+.nav-toggle__bar,
+.nav-toggle__bar::before,
+.nav-toggle__bar::after {
+  display: block;
+  width: 1.5rem;
+  height: 2px;
+  background: var(--color-text);
+}
+
+.nav-toggle__bar {
+  position: relative;
+}
+
+.nav-toggle__bar::before,
+.nav-toggle__bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle__bar::before {
+  top: -7px;
+}
+
+.nav-toggle__bar::after {
+  top: 7px;
+}
+
+/* Navigation: auf dem Handy zuerst versteckt */
+.nav {
+  display: none;
+  width: 100%;
+  padding-bottom: var(--space-m);
+}
+
+/* Häkchen gesetzt (= Burger angeklickt) → Navigation zeigen */
+.nav-toggle:checked ~ .nav {
+  display: block;
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav__link {
+  display: block;
+  padding: var(--space-s) 0;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.nav__link:hover {
+  color: var(--color-primary);
+}
+
+/* Aktuelle Seite markieren. Unterstrichen statt fett:
+   fette Schrift ist breiter und würde den Header verschieben */
+.nav__link[aria-current="page"] {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.nav__login {
+  margin-top: var(--space-s);
+}
+
+/* ---------- 6. Footer ---------- */
+.footer {
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding-block: var(--space-l);
+  font-size: var(--font-size-s);
+  color: var(--color-text-muted);
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.footer__text {
+  margin: 0;
+}
+
+.footer__links {
+  display: flex;
+  gap: var(--space-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer__link {
+  color: var(--color-text-muted);
+}
+
+/* ---------- 7. Breakpoints ---------- */
+
+/* Tablet: ab 768px */
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--space-l);
+  }
+
+  .footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop: ab 992px → Burger weg, Navigation in einer Zeile */
+@media (min-width: 992px) {
+  .nav-toggle,
+  .nav-toggle__button {
+    display: none;
+  }
+
+  .nav {
+    display: block;
+    width: auto;
+    padding-bottom: 0;
+  }
+
+  .nav__list {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-l);
+  }
+
+  .nav__login {
+    margin-top: 0;
+  }
+}
