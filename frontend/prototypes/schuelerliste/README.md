@@ -21,9 +21,10 @@ Liste von Schülerkarten als responsives Grid. Öffnen mit Live Server.
 
 ## 1.3 Modulares CSS
 
-- `css/base.css` – Variablen `--cm-*`, Grundeinstellungen
-- `css/layout.css` – Header, Footer, Grid und Media Queries
-- `css/components.css` – Karte, Button, Badge, Logo
+- `../tokens.css` – gemeinsame Design-Tokens (seit LF11A UW4)
+- `../common.css` – Grundeinstellungen, Header, Footer (für alle Seiten gleich)
+- `css/layout.css` – Seitenbereich, Grid und Media Queries
+- `css/components.css` – Karte, Badge
 
 Gelöst ist die Aufgabe, wenn das Grid bei 576 / 768 / 1200px auf 2 / 3 / 4 Spalten wechselt, es kein horizontales
 Scrollen gibt und Lighthouse mindestens 90 zeigt.
