@@ -10,11 +10,11 @@ Registrierungsformular mit Validierung und Fehlermeldungen. Öffnen mit Live Ser
 4. Fehleranzeige: Text direkt unter dem Feld + `aria-invalid="true"`.
 5. Fehlerübersicht oben als Live-Region (`role="alert"`), mit Links zu den Feldern.
 6. Validierung mit JavaScript (`js/validation.js`), ohne JS prüft der Browser selbst.
-7. Fokus-Styles festlegen (`css/focus.css`) und mit Tastatur und AXE testen.
+7. Fokus-Styles festlegen (`../common.css`, Abschnitt „Fokus“) und mit Tastatur und AXE testen.
 
 ## 1.3 Styleguide Fokus-States
 
-Siehe `css/focus.css`:
+Siehe `../common.css`, Abschnitt „Fokus“ (gilt für alle Seiten):
 
 - alle Links, Buttons, Felder: 3px blaue Linie (`#0a58ca`, Kontrast zu Weiß 6,4 : 1), 2px Abstand
 - Felder zusätzlich mit blauem Rahmen
@@ -28,7 +28,7 @@ wo der Fokus ist, und AXE keine kritischen Fehler zeigt.
 | Test | Ergebnis |
 |---|---|
 | Erstes Tab | „Zum Formular springen“ erscheint |
-| Tab-Reihenfolge | Skip-Link → Logo → Felder von oben nach unten → Link Datenschutz → Button (passt) |
+| Tab-Reihenfolge | Skip-Link → Logo → Button Hell/Dunkel → Menü → Felder von oben nach unten → Link Datenschutz → Button (passt) |
 | Klasse auswählen | mit Pfeiltasten möglich |
 | Checkbox | mit Leertaste |
 | Absenden mit Enter | funktioniert |

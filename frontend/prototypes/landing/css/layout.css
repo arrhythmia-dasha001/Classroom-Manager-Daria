@@ -1,0 +1,100 @@
+/* =========================================================
+   layout.css – Landing-Page: WO steht WAS?
+   Hero und Schnellzugriff mit dem responsiven Karten-Grid.
+   Mobile First: Breakpoints 768px (2 Spalten) und 992px (3 Spalten).
+   ========================================================= */
+
+/* ---------- Hero ---------- */
+.hero {
+  padding-block: var(--space-xl);
+  background: var(--color-surface);
+}
+
+.hero__inner {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.hero__title {
+  font-size: 2.25rem;
+}
+
+.hero__text {
+  max-width: 34rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-l);
+}
+
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+.hero__media {
+  margin: 0;
+}
+
+.hero__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- Schnellzugriff ---------- */
+.quick {
+  padding-block: var(--space-xl) var(--space-xxl);
+}
+
+/* Das responsive Grid: Handy = 1 Spalte */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-l);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Breakpoints ---------- */
+
+/* Tablet: ab 768px */
+@media (min-width: 768px) {
+  .hero__inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .hero__title {
+    font-size: 2.75rem;
+  }
+
+  .hero__actions {
+    flex-direction: row;
+  }
+
+  /* 2 Spalten */
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: ab 992px */
+@media (min-width: 992px) {
+  .hero {
+    padding-block: var(--space-xxl);
+  }
+
+  .hero__inner {
+    grid-template-columns: 3fr 2fr;
+  }
+
+  .hero__title {
+    font-size: 3.25rem;
+  }
+
+  /* 3 Spalten */
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -1,49 +1,8 @@
 /* =========================================================
-   components.css – WIE sehen die Bausteine aus? (BEM)
-   Logo, Button, Schülerkarte, Badge.
+   components.css – Schülerübersicht: WIE sehen die Bausteine aus? (BEM)
+   Schülerkarte, Badge. (Button, Header und Footer kommen aus ../common.css)
    Bausteine kennen ihren Platz auf der Seite nicht – das regelt layout.css.
    ========================================================= */
-
-/* ---------- Logo ---------- */
-.logo {
-  display: flex;
-  align-items: center;
-  gap: var(--cm-space-s);
-  color: var(--cm-text);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.logo__mark {
-  display: grid;
-  place-items: center;
-  width: 2.5rem; /* feste Größe → kein Layout-Shift */
-  height: 2.5rem;
-  border-radius: var(--cm-radius);
-  background: var(--cm-primary);
-  color: #fff;
-}
-
-/* ---------- Button ---------- */
-.button {
-  display: inline-block;
-  padding: var(--cm-space-s) var(--cm-space-l);
-  border: 2px solid var(--cm-primary);
-  border-radius: var(--cm-radius);
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.button--outline {
-  background: transparent;
-  color: var(--cm-primary);
-}
-
-.button--outline:hover {
-  background: var(--cm-primary);
-  color: #fff;
-}
 
 /* ---------- Schülerkarte ---------- */
 
@@ -57,13 +16,13 @@
   display: flex;
   flex-direction: column; /* schmale Karte: Avatar über dem Text */
   align-items: flex-start;
-  gap: var(--cm-space-m);
+  gap: var(--space-m);
   height: 100%; /* alle Karten einer Grid-Zeile gleich hoch */
-  padding: var(--cm-space-l);
-  background: var(--cm-bg);
-  border: 1px solid var(--cm-border);
-  border-radius: var(--cm-radius);
-  box-shadow: var(--cm-shadow);
+  padding: var(--space-l);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-card);
 }
 
 /* Kreis mit Initialen statt Foto: feste Größe → kein Layout-Shift (CLS),
@@ -75,19 +34,25 @@
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background: var(--cm-bg-soft);
-  color: var(--cm-primary-dark);
-  font-weight: 700;
+  background: var(--color-bg);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* In der Karte kleinere Abstände als im normalen Text */
+.student__name,
+.student p {
+  margin-bottom: var(--space-s);
 }
 
 .student__name {
-  font-size: 1.125rem;
+  font-size: var(--font-size-l);
 }
 
 .student__class,
 .student__attendance {
-  color: var(--cm-text-muted);
-  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-s);
 }
 
 /* Container Query (Bonus „Fortgeschritten“):
@@ -101,18 +66,18 @@
 /* ---------- Badge (Status-Etikett) ---------- */
 .badge {
   display: inline-block;
-  padding: var(--cm-space-xs) var(--cm-space-s);
-  border-radius: 999px; /* sehr großer Radius = Pillenform */
-  font-size: 0.8125rem;
-  font-weight: 600;
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--radius-full); /* sehr großer Radius = Pillenform */
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
 }
 
 .badge--ok {
-  background: var(--cm-success-bg);
-  color: var(--cm-success);
+  background: var(--color-success-bg);
+  color: var(--color-success);
 }
 
 .badge--warning {
-  background: var(--cm-warning-bg);
-  color: var(--cm-warning);
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
 }

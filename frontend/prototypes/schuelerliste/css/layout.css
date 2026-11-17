@@ -1,45 +1,31 @@
 /* =========================================================
-   layout.css – WO steht WAS auf der Seite?
-   Header, Seitenbereich, Footer und das responsive Grid.
+   layout.css – Schülerübersicht: WO steht WAS?
+   Seitenbereich und das responsive Grid. (Header und Footer: ../common.css)
    Mobile First: Die Regeln OHNE Media Query gelten fürs Handy,
    jede Media Query ergänzt etwas für breitere Bildschirme.
 
    Breakpoints (wie in Bootstrap, das wir später in React nutzen):
      < 576px    Handy        → 1 Spalte
      ≥ 576px    großes Handy → 2 Spalten
-     ≥ 768px    Tablet       → 3 Spalten, Header in einer Zeile
+     ≥ 768px    Tablet       → 3 Spalten
      ≥ 1200px   Desktop      → 4 Spalten
    ========================================================= */
 
-/* ---------- Header ---------- */
-.header {
-  background: var(--cm-bg);
-  border-bottom: 1px solid var(--cm-border);
-}
-
-/* Handy: Logo und Button untereinander */
-.header__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--cm-space-s);
-  padding-block: var(--cm-space-m);
-}
-
 /* ---------- Seitenbereich ---------- */
 .page {
-  padding-block: var(--cm-space-l) var(--cm-space-xl);
+  padding-block: var(--space-l) var(--space-xl);
 }
 
 /* clamp(MIN, BEVORZUGT, MAX): Schrift wächst fließend mit der Fensterbreite,
    wird aber nie kleiner als 1.75rem und nie größer als 2.5rem (Bonus „Fortgeschritten“) */
 .page__title {
+  margin-bottom: var(--space-s);
   font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
 }
 
 .page__intro {
-  color: var(--cm-text-muted);
-  margin-bottom: var(--cm-space-l);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-l);
 }
 
 /* ---------- Responsives Grid (Kern der Aufgabe) ---------- */
@@ -51,20 +37,7 @@
 
   display: grid;
   grid-template-columns: 1fr; /* Handy: 1 Spalte */
-  gap: var(--cm-space-m); /* Abstand zwischen den Karten (Zeilen UND Spalten) */
-}
-
-/* ---------- Footer ---------- */
-.footer {
-  border-top: 1px solid var(--cm-border);
-  background: var(--cm-bg);
-  color: var(--cm-text-muted);
-  font-size: 0.875rem;
-  padding-block: var(--cm-space-m);
-}
-
-.footer p {
-  margin: 0;
+  gap: var(--space-m); /* Abstand zwischen den Karten (Zeilen UND Spalten) */
 }
 
 /* =========================================================
@@ -80,16 +53,9 @@
 
 /* Breakpoint 2 – Tablet */
 @media (min-width: 768px) {
-  /* Header: Logo links, Button rechts in einer Zeile */
-  .header__inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   .student-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--cm-space-l);
+    gap: var(--space-l);
   }
 }
 

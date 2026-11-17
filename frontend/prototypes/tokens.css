@@ -1,0 +1,107 @@
+/* tokens.css – Design-Tokens für alle Web-Applikationen des Classroom-Managers.
+   Wird in jeder Seite als ERSTE CSS-Datei eingebunden.
+   1. Primitive Tokens: Farbpalette, nur Werte
+   2. Semantische Tokens: Bedeutung, verweisen auf primitive
+   In den Komponenten nur semantische Tokens benutzen! */
+
+:root {
+  /* ---------- 1. Primitive Tokens ---------- */
+  --blue-200: #9ec5fe;
+  --blue-300: #6ea8fe;
+  --blue-600: #0a58ca;
+  --blue-700: #084298;
+  --gray-50: #f3f6fb;
+  --gray-200: #d6dce5;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #374151;
+  --gray-700: #4b5563;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --white: #ffffff;
+  --green-100: #d1e7dd;
+  --green-300: #75b798;
+  --green-700: #146c43;
+  --green-950: #051b11;
+  --yellow-100: #fff3cd;
+  --yellow-300: #ffda6a;
+  --yellow-800: #8a5300;
+  --yellow-950: #332701;
+  --red-100: #f8d7da;
+  --red-300: #ea868f;
+  --red-700: #b02a37;
+  --red-950: #2c0b0e;
+
+  /* ---------- 2. Semantische Tokens ---------- */
+
+  /* Farbe */
+  --color-primary: var(--blue-600);
+  --color-primary-hover: var(--blue-700);
+  --color-on-primary: var(--white); /* Text auf primary, z. B. im Button */
+  --color-text: var(--gray-800);
+  --color-text-muted: var(--gray-700);
+  --color-bg: var(--gray-50); /* Seitenhintergrund */
+  --color-surface: var(--white); /* Karten, Header, Formular */
+  --color-border: var(--gray-200); /* Trennlinien */
+  --color-border-input: var(--gray-500); /* Rahmen von Feldern, Kontrast 3:1 */
+  --color-focus: var(--blue-600);
+  --color-success: var(--green-700);
+  --color-success-bg: var(--green-100);
+  --color-warning: var(--yellow-800);
+  --color-warning-bg: var(--yellow-100);
+  --color-error: var(--red-700);
+  --color-error-bg: var(--red-100);
+
+  /* Typografie */
+  --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-size-xs: 0.8125rem;
+  --font-size-s: 0.875rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-base: 1.6;
+  --line-height-heading: 1.2;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-xxl: 4rem;
+
+  /* Form */
+  --radius-s: 0.5rem;
+  --radius-m: 0.75rem;
+  --radius-full: 999px;
+  --shadow-card: 0 2px 8px rgba(15, 23, 42, 0.08);
+  --focus-width: 3px;
+  --focus-offset: 2px;
+}
+
+/* ---------- Dunkles Theme ----------
+   Der Button „Dunkel“ (theme.js) setzt data-theme="dark" an <html>.
+   Dann bekommen nur die semantischen Tokens andere Werte, die Komponenten bleiben gleich. */
+:root[data-theme="dark"] {
+  color-scheme: dark; /* Browser-Elemente wie Checkbox und Select auch dunkel */
+
+  --color-primary: var(--blue-300);
+  --color-primary-hover: var(--blue-200);
+  --color-on-primary: var(--gray-900);
+  --color-text: var(--gray-50);
+  --color-text-muted: var(--gray-400);
+  --color-bg: var(--gray-900);
+  --color-surface: var(--gray-800);
+  --color-border: var(--gray-600);
+  --color-border-input: var(--gray-400);
+  --color-focus: var(--blue-300);
+  --color-success: var(--green-300);
+  --color-success-bg: var(--green-950);
+  --color-warning: var(--yellow-300);
+  --color-warning-bg: var(--yellow-950);
+  --color-error: var(--red-300);
+  --color-error-bg: var(--red-950);
+  --shadow-card: none; /* Schatten sieht man auf dunklem Grund nicht */
+}

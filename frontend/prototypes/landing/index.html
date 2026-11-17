@@ -5,17 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Classroom-Manager der BBS 2 Leer: Klassen, Anwesenheiten und Kursbuch an einem Ort verwalten.">
   <title>Classroom-Manager · BBS 2 Leer</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="../theme.js"></script>
 </head>
 <body>
 
   <!-- ===== Header mit Logo und Navigation ===== -->
   <header class="header">
     <div class="header__inner container">
-      <a class="logo" href="#top">
+      <a class="logo" href="../landing/index.html">
         <span class="logo__mark" aria-hidden="true">CM</span>
         <span class="logo__text">Classroom-Manager</span>
       </a>
+
+      <!-- Hell/Dunkel: theme.js wechselt den Text -->
+      <button class="theme-toggle" id="theme-toggle" type="button">🌙 Dunkel</button>
 
       <!-- Burger-Menü ohne JavaScript -->
       <input class="nav-toggle" type="checkbox" id="nav-toggle">
@@ -26,11 +33,11 @@
 
       <nav class="nav" aria-label="Hauptnavigation">
         <ul class="nav__list">
-          <li><a class="nav__link" href="#anwesenheiten">Anwesenheiten</a></li>
-          <li><a class="nav__link" href="#klassen">Klassen</a></li>
-          <li><a class="nav__link" href="#kursbuch">Kursbuch</a></li>
-          <li><a class="nav__link" href="#hilfe">Hilfe</a></li>
-          <li><a class="button button--outline nav__login" href="#anmelden">Anmelden</a></li>
+          <li><a class="nav__link" href="../schuelerliste/index.html">Anwesenheiten</a></li>
+          <li><a class="nav__link" href="../schuelerliste/index.html">Klassen</a></li>
+          <li><a class="nav__link" href="../landing/index.html#kursbuch">Kursbuch</a></li>
+          <li><a class="nav__link" href="../landing/index.html#hilfe">Hilfe</a></li>
+          <li><a class="button button--outline nav__login" href="../registrierung/index.html">Anmelden</a></li>
         </ul>
       </nav>
     </div>
@@ -48,7 +55,7 @@
             übersichtlich auf dem PC, Tablet und Smartphone.
           </p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#anmelden">Jetzt anmelden</a>
+            <a class="button button--primary" href="../registrierung/index.html">Jetzt anmelden</a>
             <a class="button button--outline" href="#schnellzugriff">Mehr erfahren</a>
           </div>
         </div>
@@ -83,14 +90,14 @@
             <span class="card__icon" aria-hidden="true">👥</span>
             <h3 class="card__title">Klassen</h3>
             <p class="card__text">Alle Klassen und Schüler:innen auf einen Blick – mit Klassenlisten und Kontaktdaten.</p>
-            <a class="card__link" href="#klassen">Zu den Klassen <span aria-hidden="true">→</span></a>
+            <a class="card__link" href="../schuelerliste/index.html">Zu den Klassen <span aria-hidden="true">→</span></a>
           </li>
 
           <li class="card" id="anwesenheiten">
             <span class="card__icon" aria-hidden="true">✅</span>
             <h3 class="card__title">Anwesenheiten</h3>
             <p class="card__text">An- und Abwesenheit, Verspätungen und Entschuldigungen schnell erfassen.</p>
-            <a class="card__link" href="#anwesenheiten">Zu den Anwesenheiten <span aria-hidden="true">→</span></a>
+            <a class="card__link" href="../schuelerliste/index.html">Zu den Anwesenheiten <span aria-hidden="true">→</span></a>
           </li>
 
           <li class="card" id="kursbuch">
@@ -110,8 +117,8 @@
     <div class="footer__inner container">
       <p class="footer__text">© 2026 Classroom-Manager · BBS 2 Leer</p>
       <ul class="footer__links">
-        <li><a class="footer__link" href="#impressum">Impressum</a></li>
-        <li><a class="footer__link" href="#datenschutz">Datenschutz</a></li>
+        <li><a class="footer__link" href="../landing/index.html#impressum">Impressum</a></li>
+        <li><a class="footer__link" href="../landing/index.html#datenschutz">Datenschutz</a></li>
       </ul>
     </div>
   </footer>
