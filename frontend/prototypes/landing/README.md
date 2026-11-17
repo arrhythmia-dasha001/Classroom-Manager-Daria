@@ -15,8 +15,8 @@ nach dem Wireframe [`docs/wireframes/uw1-landingpage.jpg`](../../../docs/wirefra
 | Semantisches HTML5 | `<header>`, `<nav>`, `<main>`, `<section>`, `<figure>`, `<footer>` |
 | Responsives Grid | Mobile First, Karten: 1 Spalte → 2 Spalten ab **768px** → 3 Spalten ab **992px** |
 | Navigation | ab 992px als Zeile, darunter Burger-Menü (Checkbox-Trick, ohne JavaScript) |
-| Eigenes Stylesheet | alle Styles in `styles.css`, keine Inline-Styles |
-| Design-Tokens (Bonus) | Farben, Abstände, Radius als CSS Custom Properties `--cm-*` in `:root` |
+| Eigenes Stylesheet | `css/layout.css` und `css/components.css`, Header/Footer aus `../common.css`, keine Inline-Styles |
+| Design-Tokens (Bonus) | gemeinsame Tokens aus `../tokens.css` (seit LF11A UW4) |
 | BEM (Bonus) | Klassen nach `block__element--modifier`, z. B. `card__title`, `button--primary` |
 | Barrierefreiheit | `lang="de"`, sichtbarer Tastatur-Fokus, `aria-label` für Navigation, Screenreader-Text für den Burger-Button |
 
