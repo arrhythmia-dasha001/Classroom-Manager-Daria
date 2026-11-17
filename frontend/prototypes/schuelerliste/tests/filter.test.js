@@ -1,5 +1,12 @@
 // filter.test.js – Unit-Tests für filter.js (Start: npm test)
-import { filterStudents, sortStudents } from "../js/filter.js";
+import { jest } from "@jest/globals";
+import {
+  filterStudents,
+  sortStudents,
+  debounce,
+  filterToQuery,
+  queryToFilter,
+} from "../js/filter.js";
 
 // Kleine Testdaten, damit man das Ergebnis im Kopf nachrechnen kann
 const students = [
@@ -78,5 +85,46 @@ describe("sortStudents", () => {
   test("das Original-Array wird nicht verändert", () => {
     sortStudents(students, "name-asc");
     expect(students[0].name).toBe("Max Mustermann");
+  });
+});
+
+describe("debounce", () => {
+  test("führt die Funktion nur einmal aus, mit dem letzten Wert", () => {
+    jest.useFakeTimers(); // Zeit im Test selbst vorspulen statt echt zu warten
+    const fn = jest.fn();
+    const debounced = debounce(fn, 300);
+
+    debounced("a");
+    debounced("an");
+    debounced("ann");
+    expect(fn).not.toHaveBeenCalled(); // noch zu früh
+
+    jest.advanceTimersByTime(300);
+    expect(fn).toHaveBeenCalledTimes(1);
+    expect(fn).toHaveBeenCalledWith("ann");
+    jest.useRealTimers();
+  });
+});
+
+describe("URL-Query", () => {
+  test("Standardwerte → leere Query", () => {
+    expect(filterToQuery({ search: "  ", klasse: "alle", sortBy: "name-asc" })).toBe("");
+  });
+
+  test("alle Filter gesetzt → alle in der Query", () => {
+    const query = filterToQuery({ search: "lena", klasse: "FI24A", sortBy: "name-desc" });
+    expect(query).toBe("?suche=lena&klasse=FI24A&sortierung=name-desc");
+  });
+
+  test("Query wird wieder zu Filtern", () => {
+    expect(queryToFilter("?suche=lena&klasse=FI24A")).toEqual({
+      search: "lena",
+      klasse: "FI24A",
+      sortBy: "name-asc",
+    });
+  });
+
+  test("leere Query → Standardwerte", () => {
+    expect(queryToFilter("")).toEqual({ search: "", klasse: "alle", sortBy: "name-asc" });
   });
 });

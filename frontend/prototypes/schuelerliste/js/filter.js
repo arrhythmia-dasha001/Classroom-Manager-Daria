@@ -37,3 +37,38 @@ export function sortStudents(students, sortBy) {
       return copy; // unbekannte Sortierung → Reihenfolge bleibt
   }
 }
+
+/**
+ * Debounce (Fortgeschritten): fn erst ausführen, wenn `delay` ms lang nichts mehr passiert ist.
+ * Beim Tippen wird so nicht nach jedem Buchstaben gefiltert, sondern erst nach einer kurzen Pause.
+ */
+export function debounce(fn, delay) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer); // alten Auftrag abbrechen
+    timer = setTimeout(() => fn(...args), delay); // neuen Auftrag starten
+  };
+}
+
+/**
+ * URL-Query-Sync (Fortgeschritten): Filter → "?suche=lena&klasse=FI24A".
+ * Standardwerte werden weggelassen, damit die Adresse kurz bleibt.
+ */
+export function filterToQuery({ search, klasse, sortBy }) {
+  const params = new URLSearchParams();
+  if (search.trim() !== "") params.set("suche", search.trim());
+  if (klasse !== "alle") params.set("klasse", klasse);
+  if (sortBy !== "name-asc") params.set("sortierung", sortBy);
+  const query = params.toString();
+  return query === "" ? "" : `?${query}`;
+}
+
+/** Umgekehrt: "?suche=lena" → { search: "lena", klasse: "alle", sortBy: "name-asc" } */
+export function queryToFilter(query) {
+  const params = new URLSearchParams(query);
+  return {
+    search: params.get("suche") ?? "",
+    klasse: params.get("klasse") ?? "alle",
+    sortBy: params.get("sortierung") ?? "name-asc",
+  };
+}
