@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Registrierung · Classroom-Manager</title>
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/focus.css" />
-    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="../tokens.css" />
+    <link rel="stylesheet" href="../common.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
     <!-- defer: Skript wird erst ausgeführt, wenn das HTML fertig geladen ist -->
     <script src="js/validation.js" defer></script>
   </head>
@@ -15,12 +16,32 @@
     <a class="skip-link" href="#registrierung">Zum Formular springen</a>
 
     <header class="header">
-      <div class="container">
-        <a class="logo" href="../landing/index.html">Classroom-Manager</a>
+      <div class="header__inner container">
+        <a class="logo" href="../landing/index.html">
+          <span class="logo__mark" aria-hidden="true">CM</span>
+          <span class="logo__text">Classroom-Manager</span>
+        </a>
+
+        <!-- Burger-Menü ohne JavaScript -->
+        <input class="nav-toggle" type="checkbox" id="nav-toggle" />
+        <label class="nav-toggle__button" for="nav-toggle">
+          <span class="visually-hidden">Menü öffnen oder schließen</span>
+          <span class="nav-toggle__bar" aria-hidden="true"></span>
+        </label>
+
+        <nav class="nav" aria-label="Hauptnavigation">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="../schuelerliste/index.html">Anwesenheiten</a></li>
+            <li><a class="nav__link" href="../schuelerliste/index.html">Klassen</a></li>
+            <li><a class="nav__link" href="../landing/index.html#kursbuch">Kursbuch</a></li>
+            <li><a class="nav__link" href="../landing/index.html#hilfe">Hilfe</a></li>
+            <li><a class="button button--outline nav__login" href="../registrierung/index.html" aria-current="page">Anmelden</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
 
-    <main class="container page">
+    <main class="container container--narrow page">
       <h1>Registrierung</h1>
       <p>Felder mit <span aria-hidden="true">*</span><span class="visually-hidden">Stern</span> sind Pflichtfelder.</p>
 
@@ -84,8 +105,18 @@
           <p class="field__error" id="datenschutz-error"></p>
         </div>
 
-        <button class="button" type="submit">Registrieren</button>
+        <button class="button button--primary" type="submit">Registrieren</button>
       </form>
     </main>
+
+    <footer class="footer">
+      <div class="footer__inner container">
+        <p class="footer__text">© 2026 Classroom-Manager · BBS 2 Leer</p>
+        <ul class="footer__links">
+          <li><a class="footer__link" href="../landing/index.html#impressum">Impressum</a></li>
+          <li><a class="footer__link" href="../landing/index.html#datenschutz">Datenschutz</a></li>
+        </ul>
+      </div>
+    </footer>
   </body>
 </html>

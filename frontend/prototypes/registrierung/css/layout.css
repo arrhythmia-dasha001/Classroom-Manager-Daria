@@ -1,0 +1,14 @@
+/* =========================================================
+   layout.css – Registrierung: WO steht WAS?
+   Schmaler Inhaltsbereich für das Formular.
+   ========================================================= */
+
+/* Formular nicht zu breit → besser lesbar.
+   Header und Footer bleiben breit wie auf den anderen Seiten */
+.container--narrow {
+  max-width: 36rem;
+}
+
+.page {
+  padding-block: var(--space-l) var(--space-xl);
+}
