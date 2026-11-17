@@ -28,7 +28,7 @@ wo der Fokus ist, und AXE keine kritischen Fehler zeigt.
 | Test | Ergebnis |
 |---|---|
 | Erstes Tab | „Zum Formular springen“ erscheint |
-| Tab-Reihenfolge | Skip-Link → Logo → Menü → Felder von oben nach unten → Link Datenschutz → Button (passt) |
+| Tab-Reihenfolge | Skip-Link → Logo → Button Hell/Dunkel → Menü → Felder von oben nach unten → Link Datenschutz → Button (passt) |
 | Klasse auswählen | mit Pfeiltasten möglich |
 | Checkbox | mit Leertaste |
 | Absenden mit Enter | funktioniert |

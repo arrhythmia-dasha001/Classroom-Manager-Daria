@@ -165,6 +165,25 @@ select:focus-visible {
   font-size: var(--font-size-s);
 }
 
+/* Button Hell/Dunkel: margin-left: auto schiebt ihn nach rechts */
+.theme-toggle {
+  margin-left: auto;
+  margin-right: var(--space-xs);
+  padding: var(--space-xs) var(--space-s);
+  font: inherit;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-primary);
+}
+
 /* Burger-Menü: Checkbox ist unsichtbar, das Label ist der Button */
 .nav-toggle {
   position: absolute;
@@ -309,6 +328,10 @@ select:focus-visible {
     display: block;
     width: auto;
     padding-bottom: 0;
+  }
+
+  .theme-toggle {
+    margin-right: var(--space-l);
   }
 
   .nav__list {

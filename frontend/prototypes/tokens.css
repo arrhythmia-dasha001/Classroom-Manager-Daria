@@ -6,21 +6,31 @@
 
 :root {
   /* ---------- 1. Primitive Tokens ---------- */
+  --blue-200: #9ec5fe;
   --blue-300: #6ea8fe;
   --blue-600: #0a58ca;
   --blue-700: #084298;
   --gray-50: #f3f6fb;
   --gray-200: #d6dce5;
+  --gray-400: #9ca3af;
   --gray-500: #6b7280;
+  --gray-600: #374151;
   --gray-700: #4b5563;
   --gray-800: #1f2937;
+  --gray-900: #111827;
   --white: #ffffff;
   --green-100: #d1e7dd;
+  --green-300: #75b798;
   --green-700: #146c43;
+  --green-950: #051b11;
   --yellow-100: #fff3cd;
+  --yellow-300: #ffda6a;
   --yellow-800: #8a5300;
+  --yellow-950: #332701;
   --red-100: #f8d7da;
+  --red-300: #ea868f;
   --red-700: #b02a37;
+  --red-950: #2c0b0e;
 
   /* ---------- 2. Semantische Tokens ---------- */
 
@@ -71,3 +81,27 @@
   --focus-offset: 2px;
 }
 
+/* ---------- Dunkles Theme ----------
+   Der Button „Dunkel“ (theme.js) setzt data-theme="dark" an <html>.
+   Dann bekommen nur die semantischen Tokens andere Werte, die Komponenten bleiben gleich. */
+:root[data-theme="dark"] {
+  color-scheme: dark; /* Browser-Elemente wie Checkbox und Select auch dunkel */
+
+  --color-primary: var(--blue-300);
+  --color-primary-hover: var(--blue-200);
+  --color-on-primary: var(--gray-900);
+  --color-text: var(--gray-50);
+  --color-text-muted: var(--gray-400);
+  --color-bg: var(--gray-900);
+  --color-surface: var(--gray-800);
+  --color-border: var(--gray-600);
+  --color-border-input: var(--gray-400);
+  --color-focus: var(--blue-300);
+  --color-success: var(--green-300);
+  --color-success-bg: var(--green-950);
+  --color-warning: var(--yellow-300);
+  --color-warning-bg: var(--yellow-950);
+  --color-error: var(--red-300);
+  --color-error-bg: var(--red-950);
+  --shadow-card: none; /* Schatten sieht man auf dunklem Grund nicht */
+}
