@@ -38,3 +38,53 @@ Zusätzlich: `clamp()` für die Überschrift und eine Container Query für die K
 | Best Practices | 96 |
 | Cumulative Layout Shift | 0 |
 | Accessibility | 100 |
+
+---
+
+# LF10A UW4 – Filtern und Sortieren (JavaScript)
+
+Über der Liste: Suche nach Name, Auswahl der Klasse, Sortierung. Die Liste ändert sich sofort, ohne Neuladen.
+
+## 1.1 Planung
+
+1. Daten an jede Karte schreiben: `data-name`, `data-klasse`, `data-anwesenheit`.
+2. Form mit Suchfeld und zwei Auswahlfeldern über der Liste (mit `<label>`).
+3. Reine Funktionen in `js/filter.js`: `filterStudents()` und `sortStudents()`. Sie arbeiten nur mit Daten, nicht mit dem DOM → testbar.
+4. `js/app.js`: Karten einlesen, bei `input`/`change` filtern und sortieren, Karten mit `hidden` aus- und einblenden, mit `append()` neu ordnen.
+5. Trefferzahl in einer Live-Region anzeigen (`aria-live="polite"`).
+6. `submit` der Form verhindern, damit Enter die Seite nicht neu lädt.
+
+## 1.2 ESLint und Prettier
+
+Im Ordner `schuelerliste`:
+
+```
+npm install            # einmal: Werkzeuge installieren
+npm run lint           # ESLint prüft den Code (eslint.config.js)
+npm run format         # Prettier formatiert js/ und tests/ (.prettierrc.json)
+npm run format:check   # nur prüfen, nichts ändern
+```
+
+ESLint findet Fehler (z. B. unbenutzte Variablen, `==` statt `===`), Prettier sorgt für einheitliche Formatierung.
+
+## 1.3 und 1.4 Tests mit Jest
+
+```
+npm test               # Tests ausführen
+npm run test:coverage  # mit Abdeckung
+```
+
+Tests: `tests/filter.test.js` (16 Tests für Filter, Sortierung, Debounce und URL).
+
+| Datei | Statements | Branches | Funktionen |
+|---|---|---|---|
+| `js/filter.js` | 100 % | 100 % | 100 % |
+
+Gelöst ist die Aufgabe, wenn alle Tests grün sind, die Branch-Coverage mindestens 80 % ist und `npm run lint` keine Fehler zeigt. Liegt die Coverage unter 80 %, schlägt `npm run test:coverage` fehl (`coverageThreshold` in `package.json`).
+
+`js/app.js` (DOM) wird nicht mit Jest getestet, sondern im Browser.
+
+## Fortgeschritten
+
+- Debounce: die Suche filtert erst 300 ms nach dem letzten Tastendruck.
+- URL-Query-Sync: Filter stehen in der Adresszeile, z. B. `?klasse=FI24B&sortierung=anwesenheit-asc`. Den Link kann man speichern oder weitergeben.
