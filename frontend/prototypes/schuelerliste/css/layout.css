@@ -28,6 +28,19 @@
   margin-bottom: var(--space-l);
 }
 
+/* ---------- Filter (LF10A UW4) ---------- */
+.filter {
+  display: grid;
+  grid-template-columns: 1fr; /* Handy: Felder untereinander */
+  gap: var(--space-m);
+  margin-bottom: var(--space-m);
+}
+
+.filter__result {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-s);
+}
+
 /* ---------- Responsives Grid (Kern der Aufgabe) ---------- */
 .student-grid {
   /* ul ohne Aufzählungspunkte und ohne Standard-Einrückung */
@@ -53,6 +66,11 @@
 
 /* Breakpoint 2 – Tablet */
 @media (min-width: 768px) {
+  /* Filter in einer Zeile: Suche breiter als die zwei Auswahlfelder */
+  .filter {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
   .student-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-l);
