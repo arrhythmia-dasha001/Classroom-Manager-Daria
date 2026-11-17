@@ -6,8 +6,8 @@
      2. ../common.css      diese Datei
      3. css/layout.css     WO steht WAS auf dieser Seite
      4. css/components.css WIE sehen die Bausteine dieser Seite aus
-   Aufbau: 1. Basis  2. Fokus  3. Container  4. Button
-           5. Header + Navigation  6. Footer  7. Breakpoints
+   Aufbau: 1. Basis  2. Fokus  3. Container  4. Button  5. Formularfelder
+           6. Header + Navigation  7. Footer  8. Breakpoints
    ========================================================= */
 
 /* ---------- 1. Basis ---------- */
@@ -131,7 +131,33 @@ select:focus-visible {
   color: var(--color-on-primary);
 }
 
-/* ---------- 5. Header + Navigation ---------- */
+/* ---------- 5. Formularfelder (Label oben, Feld darunter) ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.field__label {
+  font-weight: var(--font-weight-semibold);
+}
+
+.field__input {
+  padding: var(--space-s);
+  font: inherit; /* Formularfelder übernehmen sonst nicht die Schrift der Seite */
+  color: var(--color-text);
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-s);
+  background: var(--color-surface);
+}
+
+.field__hint {
+  margin: 0;
+  font-size: var(--font-size-s);
+  color: var(--color-text-muted);
+}
+
+/* ---------- 6. Header + Navigation ---------- */
 .header {
   border-bottom: 1px solid var(--color-border);
   background: var(--color-surface);
@@ -271,7 +297,7 @@ select:focus-visible {
   margin-top: var(--space-s);
 }
 
-/* ---------- 6. Footer ---------- */
+/* ---------- 7. Footer ---------- */
 .footer {
   border-top: 1px solid var(--color-border);
   background: var(--color-surface);
@@ -302,7 +328,7 @@ select:focus-visible {
   color: var(--color-text-muted);
 }
 
-/* ---------- 7. Breakpoints ---------- */
+/* ---------- 8. Breakpoints ---------- */
 
 /* Tablet: ab 768px */
 @media (min-width: 768px) {
