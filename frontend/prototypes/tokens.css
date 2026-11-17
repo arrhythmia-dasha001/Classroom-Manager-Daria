@@ -1,0 +1,73 @@
+/* tokens.css – Design-Tokens für alle Web-Applikationen des Classroom-Managers.
+   Wird in jeder Seite als ERSTE CSS-Datei eingebunden.
+   1. Primitive Tokens: Farbpalette, nur Werte
+   2. Semantische Tokens: Bedeutung, verweisen auf primitive
+   In den Komponenten nur semantische Tokens benutzen! */
+
+:root {
+  /* ---------- 1. Primitive Tokens ---------- */
+  --blue-300: #6ea8fe;
+  --blue-600: #0a58ca;
+  --blue-700: #084298;
+  --gray-50: #f3f6fb;
+  --gray-200: #d6dce5;
+  --gray-500: #6b7280;
+  --gray-700: #4b5563;
+  --gray-800: #1f2937;
+  --white: #ffffff;
+  --green-100: #d1e7dd;
+  --green-700: #146c43;
+  --yellow-100: #fff3cd;
+  --yellow-800: #8a5300;
+  --red-100: #f8d7da;
+  --red-700: #b02a37;
+
+  /* ---------- 2. Semantische Tokens ---------- */
+
+  /* Farbe */
+  --color-primary: var(--blue-600);
+  --color-primary-hover: var(--blue-700);
+  --color-on-primary: var(--white); /* Text auf primary, z. B. im Button */
+  --color-text: var(--gray-800);
+  --color-text-muted: var(--gray-700);
+  --color-bg: var(--gray-50); /* Seitenhintergrund */
+  --color-surface: var(--white); /* Karten, Header, Formular */
+  --color-border: var(--gray-200); /* Trennlinien */
+  --color-border-input: var(--gray-500); /* Rahmen von Feldern, Kontrast 3:1 */
+  --color-focus: var(--blue-600);
+  --color-success: var(--green-700);
+  --color-success-bg: var(--green-100);
+  --color-warning: var(--yellow-800);
+  --color-warning-bg: var(--yellow-100);
+  --color-error: var(--red-700);
+  --color-error-bg: var(--red-100);
+
+  /* Typografie */
+  --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-size-xs: 0.8125rem;
+  --font-size-s: 0.875rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-base: 1.6;
+  --line-height-heading: 1.2;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-xxl: 4rem;
+
+  /* Form */
+  --radius-s: 0.5rem;
+  --radius-m: 0.75rem;
+  --radius-full: 999px;
+  --shadow-card: 0 2px 8px rgba(15, 23, 42, 0.08);
+  --focus-width: 3px;
+  --focus-offset: 2px;
+}
+
