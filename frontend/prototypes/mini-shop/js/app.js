@@ -1,6 +1,7 @@
 // app.js – lädt die Produkte vom Server, baut die Liste,
 // öffnet beim Klick auf „Details“ das Modal und zählt den Warenkorb.
 import { fetchProducts, formatPrice, HttpError } from "./products.js";
+import { debounce } from "./debounce.js";
 
 const list = document.getElementById("produkte");
 const dialog = document.getElementById("produkt-dialog");
@@ -11,6 +12,8 @@ const cartCount = document.getElementById("warenkorb-anzahl");
 const errorBox = document.getElementById("fehler");
 const retryButton = document.getElementById("erneut");
 const loadStatus = document.getElementById("lade-status");
+const searchForm = document.getElementById("suche-form");
+const searchInput = document.getElementById("suche");
 
 // ---------- 1. Produktliste ----------
 
@@ -101,13 +104,19 @@ function showSkeleton() {
   loadStatus.textContent = "Produkte werden geladen …";
 }
 
-async function loadProducts() {
+function resultText(search) {
+  if (!search) return `${products.length} Produkte`;
+  if (products.length === 0) return `Keine Produkte zu „${search}“ gefunden.`;
+  return `${products.length} Treffer für „${search}“`;
+}
+
+async function loadProducts(search = "") {
   errorBox.hidden = true;
   showSkeleton();
   try {
-    products = await fetchProducts();
+    products = await fetchProducts(search);
     list.replaceChildren(...products.map(createCard));
-    loadStatus.textContent = `${products.length} Produkte geladen.`;
+    loadStatus.textContent = resultText(search);
   } catch (error) {
     loadStatus.textContent = "";
     // Statt einer leeren Seite: Meldung + Button zum erneuten Laden
@@ -119,7 +128,18 @@ async function loadProducts() {
   }
 }
 
-retryButton.addEventListener("click", loadProducts);
+const currentSearch = () => searchInput.value.trim();
+
+retryButton.addEventListener("click", () => loadProducts(currentSearch()));
+
+// Suche: erst 300 ms nach dem letzten Tastendruck an den Server schicken
+searchInput.addEventListener(
+  "input",
+  debounce(() => loadProducts(currentSearch()), 300),
+);
+
+// Enter im Suchfeld würde die Seite neu laden → verhindern
+searchForm.addEventListener("submit", (event) => event.preventDefault());
 
 loadProducts();
 

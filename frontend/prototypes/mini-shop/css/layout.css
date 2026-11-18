@@ -33,6 +33,20 @@
   color: var(--color-text-muted);
 }
 
+/* ---------- Suche ---------- */
+.search {
+  max-width: 28rem;
+  margin-bottom: var(--space-s);
+}
+
+/* min-height: Zeile ist immer da → nichts springt, wenn der Text wechselt */
+.search__result {
+  min-height: 1.6em;
+  margin-bottom: var(--space-m);
+  font-size: var(--font-size-s);
+  color: var(--color-text-muted);
+}
+
 /* ---------- Produkt-Grid ----------
    Handy 1 Spalte, Tablet 2, Desktop 4 (Breakpoints wie in common.css) */
 .product-grid {

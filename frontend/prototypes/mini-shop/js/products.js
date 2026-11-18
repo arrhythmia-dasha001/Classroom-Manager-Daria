@@ -18,15 +18,17 @@ export class HttpError extends Error {
 }
 
 // GET /products → Array mit allen Produkten (JSON)
+// GET /products?q=papier → nur Produkte, in denen „papier“ vorkommt (Suche vom JSON Server)
 // async/await: Der Browser wartet auf die Antwort, ohne dass die Seite einfriert.
-export async function fetchProducts() {
+export async function fetchProducts(search = "") {
+  const query = search ? `?q=${encodeURIComponent(search)}` : "";
   // 1. Anfrage schicken, auf Antwort warten.
   //    AbortController bricht die Anfrage ab, wenn nach TIMEOUT_MS noch nichts da ist.
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   let response;
   try {
-    response = await fetch(url, { signal: controller.signal });
+    response = await fetch(url + query, { signal: controller.signal });
   } finally {
     clearTimeout(timer); // Antwort (oder Fehler) ist da → Timer nicht mehr nötig
   }
