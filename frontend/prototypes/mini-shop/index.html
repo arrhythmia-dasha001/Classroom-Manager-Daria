@@ -52,6 +52,12 @@
           <h1 class="page__title">Schulshop</h1>
           <p class="page__intro">Hefte, Stifte und Technik für den Unterricht. Demo ohne Bezahlung.</p>
         </div>
+        <!-- Warenkorb-Zähler. Absichtlich nicht im gemeinsamen Header,
+             damit der Header auf allen Seiten gleich bleibt. -->
+        <p class="cart">
+          <span aria-hidden="true">🛒</span>
+          Warenkorb: <strong id="warenkorb-anzahl">0</strong> Artikel
+        </p>
       </div>
 
       <!-- Die Karten erzeugt js/app.js aus den Daten in js/products.js -->
@@ -68,6 +74,12 @@
           <h2 class="modal__title" id="dialog-titel"></h2>
           <p class="modal__text" id="dialog-beschreibung"></p>
           <p class="modal__price" id="dialog-preis"></p>
+          <button class="button button--primary modal__add" id="dialog-warenkorb" type="button">
+            In den Warenkorb
+          </button>
+          <!-- role="status" = Live-Region: Screenreader lesen neuen Text automatisch vor.
+               Sie steht IM Dialog, weil der Rest der Seite gesperrt ist, solange er offen ist. -->
+          <p class="modal__status" id="dialog-status" role="status"></p>
         </div>
       </dialog>
     </main>

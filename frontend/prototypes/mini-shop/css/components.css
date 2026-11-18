@@ -108,3 +108,26 @@
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
 }
+
+.modal__add {
+  width: 100%;
+}
+
+/* min-height: Platz ist schon reserviert → nichts springt, wenn die Meldung erscheint */
+.modal__status {
+  min-height: 1.6em;
+  margin: var(--space-s) 0 0;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-success);
+}
+
+/* ---------- Warenkorb-Zähler ---------- */
+.cart {
+  margin: 0;
+  padding: var(--space-s) var(--space-m);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}

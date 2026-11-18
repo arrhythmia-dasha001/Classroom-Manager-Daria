@@ -1,10 +1,13 @@
-// app.js – baut die Produktliste aus den Daten in products.js
-// und öffnet beim Klick auf „Details“ das Modal.
+// app.js – baut die Produktliste aus den Daten in products.js,
+// öffnet beim Klick auf „Details“ das Modal und zählt den Warenkorb.
 import { products, formatPrice, findProduct } from "./products.js";
 
 const list = document.getElementById("produkte");
 const dialog = document.getElementById("produkt-dialog");
 const closeButton = document.getElementById("dialog-schliessen");
+const addButton = document.getElementById("dialog-warenkorb");
+const status = document.getElementById("dialog-status");
+const cartCount = document.getElementById("warenkorb-anzahl");
 
 // ---------- 1. Produktliste ----------
 
@@ -55,8 +58,11 @@ list.append(...products.map(createCard));
 // ---------- 2. Detail-Modal ----------
 
 let lastOpener = null; // welcher Button hat das Modal geöffnet?
+let currentProduct = null; // welches Produkt wird gerade angezeigt?
 
 function openDialog(product, opener) {
+  currentProduct = product;
+  status.textContent = ""; // alte Meldung vom letzten Produkt löschen
   document.getElementById("dialog-icon").textContent = product.icon;
   document.getElementById("dialog-kategorie").textContent = product.category;
   document.getElementById("dialog-titel").textContent = product.name;
@@ -87,4 +93,14 @@ dialog.addEventListener("click", (event) => {
 // damit Tastatur-Nutzer:innen an derselben Stelle weitermachen können.
 dialog.addEventListener("close", () => {
   lastOpener?.focus();
+});
+
+// ---------- 3. Warenkorb ----------
+// Ohne Backend: Die Zahl lebt nur in dieser Variablen. Nach dem Neuladen ist sie wieder 0.
+let cartItems = 0;
+
+addButton.addEventListener("click", () => {
+  cartItems += 1;
+  cartCount.textContent = cartItems;
+  status.textContent = `✓ ${currentProduct.name} liegt im Warenkorb.`;
 });
