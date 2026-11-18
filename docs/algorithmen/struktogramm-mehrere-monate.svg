@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="578" viewBox="0 0 680 578"><rect width="680" height="578" fill="#fff"/>
+<rect x="20" y="20" width="640" height="40" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="30" y="46" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" font-style="normal" text-anchor="start" fill="#111">Energiekosten für mehrere Monate</text>
+<rect x="20" y="60" width="640" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="30" y="82.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">RABATT_GRENZE := 300   (kWh pro Monat)</text>
+<rect x="20" y="94" width="640" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="30" y="116.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">RABATT_SATZ := 0,10   (10 % Rabatt)</text>
+<rect x="20" y="128" width="640" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="30" y="150.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">Eingabe: anzahlMonate, preisProKWh, grundgebuehr</text>
+<rect x="20" y="162" width="640" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="30" y="184.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">summe := 0</text>
+<path d="M20,196 H660 V230 H46 V524 H20 Z" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="30" y="218.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" font-style="normal" text-anchor="start" fill="#111">für monat := 1 bis anzahlMonate</text>
+<rect x="46" y="230" width="614" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="56" y="252.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">Eingabe: verbrauch</text>
+<rect x="46" y="264" width="614" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="56" y="286.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">arbeitspreis := verbrauch × preisProKWh</text>
+<rect x="46" y="298" width="614" height="56" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<line x1="46" y1="298" x2="488.08" y2="354" stroke="#111" stroke-width="1.5"/>
+<line x1="660" y1="298" x2="488.08" y2="354" stroke="#111" stroke-width="1.5"/>
+<text x="353.0" y="318" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" font-style="normal" text-anchor="middle" fill="#111">verbrauch ≥ RABATT_GRENZE ?</text>
+<text x="54" y="346" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="italic" text-anchor="start" fill="#111">ja</text>
+<text x="652" y="346" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="italic" text-anchor="end" fill="#111">nein</text>
+<rect x="46" y="354" width="442.08" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="56" y="376.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">rabatt := arbeitspreis × RABATT_SATZ</text>
+<rect x="46" y="388" width="442.08" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="56" y="410.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">arbeitspreis := arbeitspreis − rabatt</text>
+<rect x="488.08" y="354" width="171.92000000000002" height="68" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="574.04" y="393.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="middle" fill="#111">∅</text>
+<rect x="46" y="422" width="614" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="56" y="444.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">monatskosten := arbeitspreis + grundgebuehr</text>
+<rect x="46" y="456" width="614" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="56" y="478.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">Ausgabe: monat, monatskosten</text>
+<rect x="46" y="490" width="614" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="56" y="512.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">summe := summe + monatskosten</text>
+<rect x="20" y="524" width="640" height="34" fill="#fff" stroke="#111" stroke-width="1.5"/>
+<text x="30" y="546.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">Ausgabe: summe</text>
+</svg>
