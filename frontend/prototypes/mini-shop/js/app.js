@@ -72,8 +72,8 @@ function errorText(error) {
   if (error instanceof HttpError) {
     return `Die Anfrage hat nicht geklappt (Fehler ${error.status}).`;
   }
-  // AbortError: unser Timer in products.js hat die Anfrage abgebrochen
-  if (error.name === "AbortError") {
+  // TimeoutError: AbortSignal.timeout() in products.js hat abgebrochen
+  if (error.name === "TimeoutError") {
     return "Der Server antwortet zu langsam. Bitte versuche es noch einmal.";
   }
   // kein HttpError → es kam gar keine Antwort (Server aus, kein Netz)
@@ -110,21 +110,34 @@ function resultText(search) {
   return `${products.length} Treffer für „${search}“`;
 }
 
+// Die gerade laufende Anfrage. Kommt eine neue Suche, wird die alte abgebrochen.
+// Sonst könnte eine langsame alte Antwort NACH der neuen ankommen
+// und die richtigen Treffer überschreiben (Race Condition).
+let currentController = null;
+
 async function loadProducts(search = "") {
+  currentController?.abort(); // alte Anfrage abbrechen, falls noch eine läuft
+  const controller = new AbortController();
+  currentController = controller;
+
   errorBox.hidden = true;
   showSkeleton();
   try {
-    products = await fetchProducts(search);
+    products = await fetchProducts(search, controller.signal);
     list.replaceChildren(...products.map(createCard));
     loadStatus.textContent = resultText(search);
   } catch (error) {
+    // Von uns selbst abgebrochen, weil schon neu getippt wurde → kein Fehler, einfach ignorieren.
+    // Die neue Anfrage läuft ja schon und zeigt gleich ihr Ergebnis.
+    if (error.name === "AbortError") return;
     loadStatus.textContent = "";
     // Statt einer leeren Seite: Meldung + Button zum erneuten Laden
     list.replaceChildren();
     errorBox.querySelector(".notice__text").textContent = errorText(error);
     errorBox.hidden = false;
   } finally {
-    list.setAttribute("aria-busy", "false"); // finally: läuft immer, ob Erfolg oder Fehler
+    // finally läuft immer. Aber nur die neueste Anfrage darf "fertig" melden.
+    if (controller === currentController) list.setAttribute("aria-busy", "false");
   }
 }
 
