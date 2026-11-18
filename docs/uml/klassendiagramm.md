@@ -17,3 +17,9 @@ Fünf Klassen: Component, Input, Button, Container und Form. Jede hat zwei Attri
 ## 1.3 Abstrakte Klasse
 
 Component ist abstrakt. Es gibt keine „Component“ allein, sondern nur Input, Button usw. Ich habe eine abstrakte Klasse und kein Interface genommen, weil Component schon Attribute (id, visible) und eine fertige Methode show() hat.
+
+## 1.4 Reflexion
+
+(1) Bei der Komposition gehört das Teil fest zum Ganzen: Wird das Formular gelöscht, sind die Felder auch weg. Bei der Aggregation ist es lockerer, das Teil kann auch allein existieren.
+
+(2) Was alle Komponenten gemeinsam haben, steht nur einmal in Component. So baut man neue Komponenten schneller und kann alle gleich behandeln.
