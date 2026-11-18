@@ -131,3 +131,18 @@
   border-radius: var(--radius-full);
   white-space: nowrap;
 }
+
+/* ---------- Fehlermeldung ---------- */
+.notice {
+  max-width: 40rem;
+  padding: var(--space-l);
+  color: var(--color-text);
+  background: var(--color-error-bg);
+  border-left: 4px solid var(--color-error);
+  border-radius: var(--radius-m);
+}
+
+.notice__title {
+  font-size: var(--font-size-l);
+  color: var(--color-error);
+}

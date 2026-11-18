@@ -1,6 +1,6 @@
 // app.js – lädt die Produkte vom Server, baut die Liste,
 // öffnet beim Klick auf „Details“ das Modal und zählt den Warenkorb.
-import { fetchProducts, formatPrice } from "./products.js";
+import { fetchProducts, formatPrice, HttpError } from "./products.js";
 
 const list = document.getElementById("produkte");
 const dialog = document.getElementById("produkt-dialog");
@@ -8,6 +8,8 @@ const closeButton = document.getElementById("dialog-schliessen");
 const addButton = document.getElementById("dialog-warenkorb");
 const status = document.getElementById("dialog-status");
 const cartCount = document.getElementById("warenkorb-anzahl");
+const errorBox = document.getElementById("fehler");
+const retryButton = document.getElementById("erneut");
 
 // ---------- 1. Produktliste ----------
 
@@ -55,10 +57,35 @@ function createCard(product) {
 
 let products = []; // wird gefüllt, sobald die Antwort vom Server da ist
 
-async function loadProducts() {
-  products = await fetchProducts();
-  list.replaceChildren(...products.map(createCard));
+// Verständlicher Text für jeden Fehlerfall – keine technischen Meldungen für Nutzer:innen
+function errorText(error) {
+  if (error instanceof HttpError && error.status === 404) {
+    return "Die Produktliste wurde nicht gefunden (Fehler 404).";
+  }
+  if (error instanceof HttpError && error.status >= 500) {
+    return `Der Server hat gerade ein Problem (Fehler ${error.status}). Bitte versuche es gleich noch einmal.`;
+  }
+  if (error instanceof HttpError) {
+    return `Die Anfrage hat nicht geklappt (Fehler ${error.status}).`;
+  }
+  // kein HttpError → es kam gar keine Antwort (Server aus, kein Netz)
+  return "Der Server ist nicht erreichbar. Prüfe die Verbindung und versuche es noch einmal.";
 }
+
+async function loadProducts() {
+  errorBox.hidden = true;
+  try {
+    products = await fetchProducts();
+    list.replaceChildren(...products.map(createCard));
+  } catch (error) {
+    // Statt einer leeren Seite: Meldung + Button zum erneuten Laden
+    list.replaceChildren();
+    errorBox.querySelector(".notice__text").textContent = errorText(error);
+    errorBox.hidden = false;
+  }
+}
+
+retryButton.addEventListener("click", loadProducts);
 
 loadProducts();
 

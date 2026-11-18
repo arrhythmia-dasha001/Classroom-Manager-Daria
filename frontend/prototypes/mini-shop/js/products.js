@@ -4,11 +4,26 @@
 
 const API_URL = "http://localhost:3001/products";
 
+// Eigener Fehlertyp, damit app.js den HTTP-Statuscode (404, 500 …) kennt
+export class HttpError extends Error {
+  constructor(status) {
+    super(`HTTP-Fehler ${status}`);
+    this.status = status;
+  }
+}
+
 // GET /products → Array mit allen Produkten (JSON)
 // async/await: Der Browser wartet auf die Antwort, ohne dass die Seite einfriert.
 export async function fetchProducts() {
   const response = await fetch(API_URL); // 1. Anfrage schicken, auf Antwort warten
-  return response.json(); // 2. Text der Antwort (JSON) in ein JS-Array umwandeln
+
+  // 2. Wichtig: fetch() wirft bei 404 oder 500 KEINEN Fehler, die Antwort ist ja angekommen.
+  //    response.ok ist nur bei Status 200–299 true → sonst selbst einen Fehler werfen.
+  if (!response.ok) {
+    throw new HttpError(response.status);
+  }
+
+  return response.json(); // 3. Text der Antwort (JSON) in ein JS-Array umwandeln
 }
 
 // Preis im deutschen Format: 2.49 → "2,49 €"

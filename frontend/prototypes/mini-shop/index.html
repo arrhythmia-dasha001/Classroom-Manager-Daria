@@ -62,7 +62,15 @@
         </p>
       </div>
 
-      <!-- Die Karten erzeugt js/app.js aus den Daten in js/products.js -->
+      <!-- Fehlermeldung, wenn der Server nicht antwortet oder einen Fehler schickt.
+           role="alert": Screenreader lesen sie sofort vor, sobald sie sichtbar wird. -->
+      <div class="notice" id="fehler" role="alert" hidden>
+        <h2 class="notice__title">Produkte konnten nicht geladen werden</h2>
+        <p class="notice__text"></p>
+        <button class="button button--primary" id="erneut" type="button">Erneut versuchen</button>
+      </div>
+
+      <!-- Die Karten erzeugt js/app.js aus den Daten vom JSON Server -->
       <ul class="product-grid" id="produkte" aria-label="Produkte"></ul>
 
       <!-- Detail-Modal: <dialog> mit showModal() bringt viel schon mit:
