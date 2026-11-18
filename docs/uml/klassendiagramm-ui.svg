@@ -37,4 +37,21 @@
 <text x="708" y="566" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">- method: string</text>
 <polyline points="700,578 930,578" fill="none" stroke="#111" stroke-width="1.4"/>
 <text x="708" y="596" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">+ render(): HTMLElement</text>
-<text x="708" y="614" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">+ submit(): void</text></svg>
+<text x="708" y="614" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">+ submit(): void</text>
+<polyline points="150.0,270 150.0,220" fill="none" stroke="#111" stroke-width="1.4"/>
+<polyline points="480.0,270 480.0,220" fill="none" stroke="#111" stroke-width="1.4"/>
+<polyline points="815.0,270 815.0,220" fill="none" stroke="#111" stroke-width="1.4"/>
+<polyline points="150.0,220 815.0,220" fill="none" stroke="#111" stroke-width="1.4"/>
+<polyline points="480.0,220 480.0,160" fill="none" stroke="#111" stroke-width="1.4"/>
+<polygon points="480.0,146 471.0,160 489.0,160" fill="#fff" stroke="#111" stroke-width="1.4"/>
+<polyline points="815.0,500 815.0,410" fill="none" stroke="#111" stroke-width="1.4"/>
+<polygon points="815.0,396 806.0,410 824.0,410" fill="#fff" stroke="#111" stroke-width="1.4"/>
+<polyline points="480.0,396 480.0,530 700,530" fill="none" stroke="#111" stroke-width="1.4"/>
+<text x="488.0" y="414" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">1</text>
+<text x="692" y="522" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" font-style="normal" text-anchor="end" fill="#111">1</text>
+<text x="610.0" y="522" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" font-style="italic" text-anchor="middle" fill="#111">schickt ab ▸</text>
+<polygon points="700,590 690,584 680,590 690,596" fill="#111" stroke="#111" stroke-width="1.4"/>
+<polyline points="680,590 150.0,590 150.0,396" fill="none" stroke="#111" stroke-width="1.4"/>
+<text x="674" y="582" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" font-style="normal" text-anchor="end" fill="#111">1</text>
+<text x="158.0" y="414" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" font-style="normal" text-anchor="start" fill="#111">1..*</text>
+<text x="425.0" y="584" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" font-style="italic" text-anchor="middle" fill="#111">besteht aus</text></svg>
