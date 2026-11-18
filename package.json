@@ -5,7 +5,8 @@
   "workspaces": [
     "frontend",
     "backend",
-    "frontend/prototypes/schuelerliste"
+    "frontend/prototypes/schuelerliste",
+    "frontend/prototypes/mini-shop"
   ],
   "scripts": {
     "start:backend": "npm run dev --prefix backend",

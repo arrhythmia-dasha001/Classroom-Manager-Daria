@@ -1,0 +1,12 @@
+{
+  "name": "mini-shop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Schulshop-Prototyp: Produkte kommen per REST vom JSON Server",
+  "scripts": {
+    "api": "json-server --watch db.json --port 3001 --delay 800"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.4"
+  }
+}

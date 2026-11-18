@@ -1,82 +1,48 @@
-// products.js – Produktdaten des Schulshops und kleine Hilfsfunktionen.
-// Kein Backend: Die Daten stehen direkt hier. Später kämen sie per fetch() von der API.
+// products.js – Produkte vom Server holen und Preise formatieren.
+// Die Daten liegen jetzt in db.json, der JSON Server liefert sie als REST-API aus.
+// Starten: npm run api (im Ordner mini-shop)
 
-export const products = [
-  {
-    id: 1,
-    name: "Collegeblock A4, kariert",
-    category: "Papier",
-    price: 2.49,
-    icon: "📒",
-    description: "80 Blatt, gelocht, mit Rand. Passt in jeden Ordner.",
-  },
-  {
-    id: 2,
-    name: "Kugelschreiber, 3 Stück",
-    category: "Schreiben",
-    price: 1.99,
-    icon: "🖊️",
-    description: "Blaue Mine, mittlere Strichstärke, mit Clip.",
-  },
-  {
-    id: 3,
-    name: "Textmarker-Set",
-    category: "Schreiben",
-    price: 3.99,
-    icon: "🖍️",
-    description: "4 Farben: Gelb, Grün, Pink und Orange. Trocknet schnell.",
-  },
-  {
-    id: 4,
-    name: "Ordner A4, breit",
-    category: "Ordnen",
-    price: 2.79,
-    icon: "📁",
-    description: "8 cm Rückenbreite, mit Rückenschild zum Beschriften.",
-  },
-  {
-    id: 5,
-    name: "USB-Stick 32 GB",
-    category: "Technik",
-    price: 7.99,
-    icon: "💾",
-    description: "USB 3.0, klein und mit Öse für den Schlüsselbund.",
-  },
-  {
-    id: 6,
-    name: "Taschenrechner",
-    category: "Technik",
-    price: 14.9,
-    icon: "🧮",
-    description: "Wissenschaftlicher Rechner mit Bruchrechnung, für Prüfungen zugelassen.",
-  },
-  {
-    id: 7,
-    name: "Geodreieck 16 cm",
-    category: "Zeichnen",
-    price: 1.49,
-    icon: "📐",
-    description: "Bruchsicher, mit Griff und mm-Einteilung.",
-  },
-  {
-    id: 8,
-    name: "Haftnotizen, 5 Blöcke",
-    category: "Papier",
-    price: 2.99,
-    icon: "🗒️",
-    description: "76 × 76 mm, je 100 Blatt, lösen sich ohne Reste.",
-  },
-];
+const API_URL = "http://localhost:3001/products";
+const TIMEOUT_MS = 5000; // länger als 5 Sekunden warten wir nicht
+
+// Zum Testen von 1.4: index.html?test=404 fragt eine Adresse an, die es nicht gibt
+const testMode = new URLSearchParams(location.search).get("test");
+const url = testMode === "404" ? "http://localhost:3001/gibt-es-nicht" : API_URL;
+
+// Eigener Fehlertyp, damit app.js den HTTP-Statuscode (404, 500 …) kennt
+export class HttpError extends Error {
+  constructor(status) {
+    super(`HTTP-Fehler ${status}`);
+    this.status = status;
+  }
+}
+
+// GET /products → Array mit allen Produkten (JSON)
+// async/await: Der Browser wartet auf die Antwort, ohne dass die Seite einfriert.
+export async function fetchProducts() {
+  // 1. Anfrage schicken, auf Antwort warten.
+  //    AbortController bricht die Anfrage ab, wenn nach TIMEOUT_MS noch nichts da ist.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  let response;
+  try {
+    response = await fetch(url, { signal: controller.signal });
+  } finally {
+    clearTimeout(timer); // Antwort (oder Fehler) ist da → Timer nicht mehr nötig
+  }
+
+  // 2. Wichtig: fetch() wirft bei 404 oder 500 KEINEN Fehler, die Antwort ist ja angekommen.
+  //    response.ok ist nur bei Status 200–299 true → sonst selbst einen Fehler werfen.
+  if (!response.ok) {
+    throw new HttpError(response.status);
+  }
+
+  return response.json(); // 3. Text der Antwort (JSON) in ein JS-Array umwandeln
+}
 
 // Preis im deutschen Format: 2.49 → "2,49 €"
-// Intl.NumberFormat kennt Komma, Tausenderpunkt und Währungszeichen für jede Sprache.
 const euro = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
 
 export function formatPrice(price) {
   return euro.format(price);
-}
-
-// Ein Produkt über seine id finden (für das Detail-Modal)
-export function findProduct(id) {
-  return products.find((product) => product.id === id);
 }
