@@ -1,6 +1,7 @@
 // app.js – lädt die Produkte vom Server, baut die Liste,
 // öffnet beim Klick auf „Details“ das Modal und zählt den Warenkorb.
 import { fetchProducts, formatPrice, HttpError } from "./products.js";
+import { debounce } from "./debounce.js";
 
 const list = document.getElementById("produkte");
 const dialog = document.getElementById("produkt-dialog");
@@ -11,6 +12,8 @@ const cartCount = document.getElementById("warenkorb-anzahl");
 const errorBox = document.getElementById("fehler");
 const retryButton = document.getElementById("erneut");
 const loadStatus = document.getElementById("lade-status");
+const searchForm = document.getElementById("suche-form");
+const searchInput = document.getElementById("suche");
 
 // ---------- 1. Produktliste ----------
 
@@ -69,9 +72,9 @@ function errorText(error) {
   if (error instanceof HttpError) {
     return `Die Anfrage hat nicht geklappt (Fehler ${error.status}).`;
   }
-  // AbortError: unser Timer in products.js hat die Anfrage abgebrochen
-  if (error.name === "AbortError") {
-    return "Der Server antwortet zu langsam. Bitte versuche es noch einmal.";
+  // TimeoutError: AbortSignal.timeout() in products.js hat abgebrochen
+  if (error.name === "TimeoutError") {
+    return "Der Server hat zu lange gebraucht, die Suche wurde abgebrochen. Bitte versuche es noch einmal.";
   }
   // kein HttpError → es kam gar keine Antwort (Server aus, kein Netz)
   return "Der Server ist nicht erreichbar. Prüfe die Verbindung und versuche es noch einmal.";
@@ -101,25 +104,89 @@ function showSkeleton() {
   loadStatus.textContent = "Produkte werden geladen …";
 }
 
-async function loadProducts() {
+function resultText(search) {
+  if (!search) return `${products.length} Produkte`;
+  if (products.length === 0) return `Keine Produkte zu „${search}“ gefunden.`;
+  return `${products.length} Treffer für „${search}“`;
+}
+
+// Die gerade laufende Anfrage. Kommt eine neue Suche, wird die alte abgebrochen.
+// Sonst könnte eine langsame alte Antwort NACH der neuen ankommen
+// und die richtigen Treffer überschreiben (Race Condition).
+let currentController = null;
+let lastProducts = []; // letzte erfolgreiche Liste – bleibt stehen, wenn eine Suche schiefgeht
+
+// ---------- Toast: kurze Meldung unten, verschwindet nach 6 Sekunden von selbst ----------
+const toast = document.getElementById("toast");
+const toastText = document.getElementById("toast-text");
+let toastTimer;
+
+function showToast(message) {
+  toastText.textContent = message;
+  toast.hidden = false; // role="alert" → Screenreader liest den Text sofort vor
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(hideToast, 6000);
+}
+
+function hideToast() {
+  toast.hidden = true;
+}
+
+document.getElementById("toast-schliessen").addEventListener("click", hideToast);
+document.getElementById("toast-erneut").addEventListener("click", () => {
+  hideToast();
+  loadProducts(currentSearch());
+});
+
+async function loadProducts(search = "") {
+  currentController?.abort(); // alte Anfrage abbrechen, falls noch eine läuft
+  const controller = new AbortController();
+  currentController = controller;
+
   errorBox.hidden = true;
   showSkeleton();
   try {
-    products = await fetchProducts();
+    products = await fetchProducts(search, controller.signal);
+    lastProducts = products;
     list.replaceChildren(...products.map(createCard));
-    loadStatus.textContent = `${products.length} Produkte geladen.`;
+    loadStatus.textContent = resultText(search);
+    hideToast(); // alte Fehlermeldung ist jetzt erledigt
   } catch (error) {
-    loadStatus.textContent = "";
-    // Statt einer leeren Seite: Meldung + Button zum erneuten Laden
-    list.replaceChildren();
-    errorBox.querySelector(".notice__text").textContent = errorText(error);
-    errorBox.hidden = false;
+    // Von uns selbst abgebrochen, weil schon neu getippt wurde → kein Fehler, einfach ignorieren.
+    // Die neue Anfrage läuft ja schon und zeigt gleich ihr Ergebnis.
+    if (error.name === "AbortError") return;
+
+    if (lastProducts.length > 0) {
+      // Suche ging schief, aber es gab schon eine Liste → die alte Liste stehen lassen + Toast
+      products = lastProducts;
+      list.replaceChildren(...products.map(createCard));
+      loadStatus.textContent = "Suche nicht möglich – du siehst die letzten Ergebnisse.";
+      showToast(errorText(error));
+    } else {
+      // Schon das erste Laden ging schief → große Meldung statt leerer Seite
+      loadStatus.textContent = "";
+      list.replaceChildren();
+      errorBox.querySelector(".notice__text").textContent = errorText(error);
+      errorBox.hidden = false;
+    }
   } finally {
-    list.setAttribute("aria-busy", "false"); // finally: läuft immer, ob Erfolg oder Fehler
+    // finally läuft immer. Aber nur die neueste Anfrage darf "fertig" melden.
+    if (controller === currentController) list.setAttribute("aria-busy", "false");
   }
 }
 
-retryButton.addEventListener("click", loadProducts);
+const currentSearch = () => searchInput.value.trim();
+
+retryButton.addEventListener("click", () => loadProducts(currentSearch()));
+
+// Suche: erst 300 ms nach dem letzten Tastendruck an den Server schicken
+searchInput.addEventListener(
+  "input",
+  debounce(() => loadProducts(currentSearch()), 300),
+);
+
+// Enter im Suchfeld würde die Seite neu laden → verhindern
+searchForm.addEventListener("submit", (event) => event.preventDefault());
 
 loadProducts();
 

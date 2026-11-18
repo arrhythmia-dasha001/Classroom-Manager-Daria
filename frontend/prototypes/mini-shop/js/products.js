@@ -3,11 +3,12 @@
 // Starten: npm run api (im Ordner mini-shop)
 
 const API_URL = "http://localhost:3001/products";
-const TIMEOUT_MS = 5000; // länger als 5 Sekunden warten wir nicht
-
-// Zum Testen von 1.4: index.html?test=404 fragt eine Adresse an, die es nicht gibt
+// Zum Testen:
+//   index.html?test=404     → Adresse, die es nicht gibt
+//   index.html?test=timeout → Suche bricht nach 300 ms ab, der Server braucht aber 800 ms
 const testMode = new URLSearchParams(location.search).get("test");
 const url = testMode === "404" ? "http://localhost:3001/gibt-es-nicht" : API_URL;
+const TIMEOUT_MS = 5000; // länger als 5 Sekunden warten wir nicht
 
 // Eigener Fehlertyp, damit app.js den HTTP-Statuscode (404, 500 …) kennt
 export class HttpError extends Error {
@@ -18,18 +19,20 @@ export class HttpError extends Error {
 }
 
 // GET /products → Array mit allen Produkten (JSON)
+// GET /products?q=papier → nur Produkte, in denen „papier“ vorkommt (Suche vom JSON Server)
 // async/await: Der Browser wartet auf die Antwort, ohne dass die Seite einfriert.
-export async function fetchProducts() {
-  // 1. Anfrage schicken, auf Antwort warten.
-  //    AbortController bricht die Anfrage ab, wenn nach TIMEOUT_MS noch nichts da ist.
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
-  let response;
-  try {
-    response = await fetch(url, { signal: controller.signal });
-  } finally {
-    clearTimeout(timer); // Antwort (oder Fehler) ist da → Timer nicht mehr nötig
-  }
+// signal: kommt von app.js, damit eine neue Eingabe diese Anfrage abbrechen kann
+export async function fetchProducts(search = "", signal) {
+  const query = search ? `?q=${encodeURIComponent(search)}` : "";
+
+  // 1. Anfrage schicken, auf Antwort warten. Zwei Gründe zum Abbrechen:
+  //    - app.js bricht ab, weil schon neu getippt wurde  → Fehler "AbortError"
+  //    - nach TIMEOUT_MS ist noch keine Antwort da       → Fehler "TimeoutError"
+  //    AbortSignal.any() bricht ab, sobald EINER der beiden auslöst.
+  const ms = testMode === "timeout" && search ? 300 : TIMEOUT_MS;
+  const timeout = AbortSignal.timeout(ms);
+  const both = signal ? AbortSignal.any([signal, timeout]) : timeout;
+  const response = await fetch(url + query, { signal: both });
 
   // 2. Wichtig: fetch() wirft bei 404 oder 500 KEINEN Fehler, die Antwort ist ja angekommen.
   //    response.ok ist nur bei Status 200–299 true → sonst selbst einen Fehler werfen.

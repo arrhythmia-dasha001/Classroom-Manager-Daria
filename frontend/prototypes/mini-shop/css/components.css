@@ -191,6 +191,72 @@
   }
 }
 
+/* ---------- Toast ----------
+   Unten in der Mitte über allem. Dunkel, damit er sich vom Inhalt abhebt. */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-l);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  width: min(32rem, calc(100% - 2 * var(--space-m)));
+  padding: var(--space-s) var(--space-s) var(--space-s) var(--space-m);
+  color: var(--color-surface);
+  background: var(--color-text);
+  border-radius: var(--radius-m);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.3);
+  transform: translateX(-50%);
+}
+
+/* display: flex würde das hidden-Attribut überschreiben → hier wieder ausblenden */
+.toast[hidden] {
+  display: none;
+}
+
+.toast__text {
+  flex: 1;
+  margin: 0;
+  font-size: var(--font-size-s);
+}
+
+.toast__action,
+.toast__close {
+  flex-shrink: 0;
+  padding: var(--space-s);
+  font: inherit;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-semibold);
+  color: inherit;
+  background: none;
+  border: none;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+}
+
+.toast__action {
+  text-decoration: underline;
+}
+
+/* Fokus auf dunklem Grund: helle Linie statt blauer */
+.toast button:focus-visible {
+  outline-color: var(--color-surface);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .toast:not([hidden]) {
+    animation: toast-in 0.25s ease-out;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 1rem);
+  }
+}
+
 /* ---------- Fehlermeldung ---------- */
 .notice {
   max-width: 40rem;

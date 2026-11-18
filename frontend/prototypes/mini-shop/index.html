@@ -62,6 +62,12 @@
         </p>
       </div>
 
+      <!-- Suche: js/app.js schickt die Eingabe mit ?q= an den JSON Server -->
+      <form class="search field" id="suche-form" role="search">
+        <label class="field__label" for="suche">Produkte suchen</label>
+        <input class="field__input" id="suche" type="search" placeholder="z. B. Papier oder Technik" autocomplete="off" />
+      </form>
+
       <!-- Fehlermeldung, wenn der Server nicht antwortet oder einen Fehler schickt.
            role="alert": Screenreader lesen sie sofort vor, sobald sie sichtbar wird. -->
       <div class="notice" id="fehler" role="alert" hidden>
@@ -70,11 +76,18 @@
         <button class="button button--primary" id="erneut" type="button">Erneut versuchen</button>
       </div>
 
-      <!-- Ladezustand für Screenreader (die grauen Skeleton-Karten sieht man nur) -->
-      <p class="visually-hidden" id="lade-status" role="status"></p>
+      <!-- Ladezustand und Trefferzahl, role="status": Screenreader lesen Änderungen vor -->
+      <p class="search__result" id="lade-status" role="status"></p>
 
       <!-- Die Karten erzeugt js/app.js aus den Daten vom JSON Server -->
       <ul class="product-grid" id="produkte" aria-label="Produkte"></ul>
+
+      <!-- Toast: kurze Fehlermeldung unten am Rand, verschwindet nach 6 s von selbst -->
+      <div class="toast" id="toast" role="alert" hidden>
+        <p class="toast__text" id="toast-text"></p>
+        <button class="toast__action" id="toast-erneut" type="button">Erneut versuchen</button>
+        <button class="toast__close" id="toast-schliessen" type="button" aria-label="Meldung schließen">✕</button>
+      </div>
 
       <!-- Detail-Modal: <dialog> mit showModal() bringt viel schon mit:
            Esc schließt, der Rest der Seite ist gesperrt, der Fokus bleibt im Dialog.
