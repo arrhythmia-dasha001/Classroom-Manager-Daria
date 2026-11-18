@@ -69,6 +69,10 @@ function errorText(error) {
   if (error instanceof HttpError) {
     return `Die Anfrage hat nicht geklappt (Fehler ${error.status}).`;
   }
+  // AbortError: unser Timer in products.js hat die Anfrage abgebrochen
+  if (error.name === "AbortError") {
+    return "Der Server antwortet zu langsam. Bitte versuche es noch einmal.";
+  }
   // kein HttpError → es kam gar keine Antwort (Server aus, kein Netz)
   return "Der Server ist nicht erreichbar. Prüfe die Verbindung und versuche es noch einmal.";
 }
