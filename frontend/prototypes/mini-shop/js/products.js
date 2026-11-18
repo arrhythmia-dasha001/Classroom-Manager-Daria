@@ -5,10 +5,10 @@
 const API_URL = "http://localhost:3001/products";
 // Zum Testen:
 //   index.html?test=404     → Adresse, die es nicht gibt
-//   index.html?test=timeout → Timeout 300 ms, der Server braucht aber 800 ms
+//   index.html?test=timeout → Suche bricht nach 300 ms ab, der Server braucht aber 800 ms
 const testMode = new URLSearchParams(location.search).get("test");
 const url = testMode === "404" ? "http://localhost:3001/gibt-es-nicht" : API_URL;
-const TIMEOUT_MS = testMode === "timeout" ? 300 : 5000; // länger als 5 Sekunden warten wir nicht
+const TIMEOUT_MS = 5000; // länger als 5 Sekunden warten wir nicht
 
 // Eigener Fehlertyp, damit app.js den HTTP-Statuscode (404, 500 …) kennt
 export class HttpError extends Error {
@@ -29,7 +29,8 @@ export async function fetchProducts(search = "", signal) {
   //    - app.js bricht ab, weil schon neu getippt wurde  → Fehler "AbortError"
   //    - nach TIMEOUT_MS ist noch keine Antwort da       → Fehler "TimeoutError"
   //    AbortSignal.any() bricht ab, sobald EINER der beiden auslöst.
-  const timeout = AbortSignal.timeout(TIMEOUT_MS);
+  const ms = testMode === "timeout" && search ? 300 : TIMEOUT_MS;
+  const timeout = AbortSignal.timeout(ms);
   const both = signal ? AbortSignal.any([signal, timeout]) : timeout;
   const response = await fetch(url + query, { signal: both });
 

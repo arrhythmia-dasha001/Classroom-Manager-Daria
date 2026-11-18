@@ -82,6 +82,13 @@
       <!-- Die Karten erzeugt js/app.js aus den Daten vom JSON Server -->
       <ul class="product-grid" id="produkte" aria-label="Produkte"></ul>
 
+      <!-- Toast: kurze Fehlermeldung unten am Rand, verschwindet nach 6 s von selbst -->
+      <div class="toast" id="toast" role="alert" hidden>
+        <p class="toast__text" id="toast-text"></p>
+        <button class="toast__action" id="toast-erneut" type="button">Erneut versuchen</button>
+        <button class="toast__close" id="toast-schliessen" type="button" aria-label="Meldung schließen">✕</button>
+      </div>
+
       <!-- Detail-Modal: <dialog> mit showModal() bringt viel schon mit:
            Esc schließt, der Rest der Seite ist gesperrt, der Fokus bleibt im Dialog.
            Den Inhalt füllt js/app.js beim Öffnen. -->
