@@ -32,3 +32,33 @@ Test mit 0,35 € pro kWh und 12 € Grundgebühr:
 
 - 250 kWh → 87,50 + 12 = 99,50 € (kein Rabatt)
 - 320 kWh → 112,00 − 11,20 + 12 = 112,80 € (mit Rabatt)
+
+## 1.3 Mehrere Monate
+
+Ich habe eine Zählschleife genommen, weil man die Anzahl der Monate vorher kennt. Die Rabatt-Prüfung steht in der Schleife, damit sie jeden Monat neu gemacht wird.
+
+![Struktogramm Energiekosten für mehrere Monate](struktogramm-mehrere-monate.svg)
+
+```
+RABATT_GRENZE := 300
+RABATT_SATZ := 0,10
+
+EINGABE anzahlMonate, preisProKWh, grundgebuehr
+summe := 0
+FÜR monat := 1 BIS anzahlMonate
+    EINGABE verbrauch
+    arbeitspreis := verbrauch * preisProKWh
+    WENN verbrauch >= RABATT_GRENZE DANN
+        rabatt := arbeitspreis * RABATT_SATZ
+        arbeitspreis := arbeitspreis - rabatt
+    SONST
+        // nichts
+    ENDE WENN
+    monatskosten := arbeitspreis + grundgebuehr
+    AUSGABE monat, monatskosten
+    summe := summe + monatskosten
+ENDE FÜR
+AUSGABE summe
+```
+
+Test mit 3 Monaten (250, 320 und 300 kWh): 99,50 + 112,80 + 106,50 = 318,80 €
