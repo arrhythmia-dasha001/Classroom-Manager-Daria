@@ -1,0 +1,58 @@
+/* =========================================================
+   layout.css – Schulshop: WO steht WAS?
+   Header und Footer kommen aus ../common.css.
+   Mobile First: Regeln ohne Media Query gelten fürs Handy.
+   ========================================================= */
+
+/* ---------- Seitenbereich ---------- */
+.page {
+  padding-block: var(--space-l) var(--space-xl);
+  /* Mindestens so hoch wie der Bildschirm (minus Header).
+     Die Karten kommen erst per JavaScript. Ohne diese Zeile steht der Footer kurz unten
+     im Bild und springt dann weg → Layout Shift (Lighthouse CLS 0,124). */
+  min-height: calc(100vh - 4rem);
+}
+
+/* Titel links, später der Warenkorb rechts daneben */
+.page__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-m);
+  margin-bottom: var(--space-l);
+}
+
+.page__title {
+  margin-bottom: var(--space-s);
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+}
+
+.page__intro {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Produkt-Grid ----------
+   Handy 1 Spalte, Tablet 2, Desktop 4 (Breakpoints wie in common.css) */
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-l);
+  }
+}
+
+@media (min-width: 992px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Schulshop des Classroom-Managers: Hefte, Stifte und Technik für den Unterricht" />
+    <title>Schulshop · Classroom-Manager</title>
+    <!-- Icon im Browser-Tab direkt im HTML: sonst fragt der Browser /favicon.ico an → 404-Fehler in der Konsole -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a58ca'/%3E%3Ctext x='16' y='21' font-family='sans-serif' font-size='13' font-weight='700' fill='white' text-anchor='middle'%3ECM%3C/text%3E%3C/svg%3E" />
+
+    <!-- Gleiche Reihenfolge wie auf allen Seiten: Tokens → gemeinsame Styles → Seite -->
+    <link rel="stylesheet" href="../tokens.css" />
+    <link rel="stylesheet" href="../common.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <script src="../theme.js"></script>
+    <!-- type="module": app.js lädt products.js mit import (nur über Live Server, nicht file://) -->
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__inner container">
+        <a class="logo" href="../landing/index.html">
+          <span class="logo__mark" aria-hidden="true">CM</span>
+          <span class="logo__text">Classroom-Manager</span>
+        </a>
+
+        <!-- Hell/Dunkel: theme.js wechselt den Text -->
+        <button class="theme-toggle" id="theme-toggle" type="button">🌙 Dunkel</button>
+
+        <!-- Burger-Menü ohne JavaScript -->
+        <input class="nav-toggle" type="checkbox" id="nav-toggle" />
+        <label class="nav-toggle__button" for="nav-toggle">
+          <span class="visually-hidden">Menü öffnen oder schließen</span>
+          <span class="nav-toggle__bar" aria-hidden="true"></span>
+        </label>
+
+        <nav class="nav" aria-label="Hauptnavigation">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="../schuelerliste/index.html">Anwesenheiten</a></li>
+            <li><a class="nav__link" href="../schuelerliste/index.html">Klassen</a></li>
+            <li><a class="nav__link" href="../landing/index.html#kursbuch">Kursbuch</a></li>
+            <li><a class="nav__link" href="../landing/index.html#hilfe">Hilfe</a></li>
+            <li><a class="nav__link" href="../mini-shop/index.html" aria-current="page">Shop</a></li>
+            <li><a class="button button--outline nav__login" href="../registrierung/index.html">Anmelden</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page">
+      <div class="page__head">
+        <div>
+          <h1 class="page__title">Schulshop</h1>
+          <p class="page__intro">Hefte, Stifte und Technik für den Unterricht. Demo ohne Bezahlung.</p>
+        </div>
+        <!-- Warenkorb-Zähler. Absichtlich nicht im gemeinsamen Header,
+             damit der Header auf allen Seiten gleich bleibt. -->
+        <p class="cart">
+          <span aria-hidden="true">🛒</span>
+          Warenkorb: <strong id="warenkorb-anzahl">0</strong> Artikel
+        </p>
+      </div>
+
+      <!-- Die Karten erzeugt js/app.js aus den Daten in js/products.js -->
+      <ul class="product-grid" id="produkte" aria-label="Produkte"></ul>
+
+      <!-- Detail-Modal: <dialog> mit showModal() bringt viel schon mit:
+           Esc schließt, der Rest der Seite ist gesperrt, der Fokus bleibt im Dialog.
+           Den Inhalt füllt js/app.js beim Öffnen. -->
+      <dialog class="modal" id="produkt-dialog" aria-labelledby="dialog-titel">
+        <div class="modal__inner">
+          <button class="modal__close" id="dialog-schliessen" type="button" aria-label="Schließen">✕</button>
+          <span class="product__icon" id="dialog-icon" aria-hidden="true"></span>
+          <p class="product__category" id="dialog-kategorie"></p>
+          <h2 class="modal__title" id="dialog-titel"></h2>
+          <p class="modal__text" id="dialog-beschreibung"></p>
+          <p class="modal__price" id="dialog-preis"></p>
+          <button class="button button--primary modal__add" id="dialog-warenkorb" type="button">
+            In den Warenkorb
+          </button>
+          <!-- role="status" = Live-Region: Screenreader lesen neuen Text automatisch vor.
+               Sie steht IM Dialog, weil der Rest der Seite gesperrt ist, solange er offen ist. -->
+          <p class="modal__status" id="dialog-status" role="status"></p>
+        </div>
+      </dialog>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__inner container">
+        <p class="footer__text">© 2026 Classroom-Manager · BBS 2 Leer</p>
+        <ul class="footer__links">
+          <li><a class="footer__link" href="../landing/index.html#impressum">Impressum</a></li>
+          <li><a class="footer__link" href="../landing/index.html#datenschutz">Datenschutz</a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>

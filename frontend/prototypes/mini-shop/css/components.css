@@ -1,0 +1,133 @@
+/* =========================================================
+   components.css – Schulshop: WIE sehen die Bausteine aus? (BEM)
+   Button, Header und Footer kommen aus ../common.css.
+   ========================================================= */
+
+/* ---------- Produktkarte ---------- */
+.product {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* alle Karten einer Reihe gleich hoch */
+  padding: var(--space-l);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-card);
+}
+
+/* Emoji statt Foto: nichts zum Nachladen, feste Größe → kein Layout-Shift */
+.product__icon {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: var(--space-m);
+  border-radius: var(--radius-m);
+  background: var(--color-bg);
+  font-size: 1.75rem;
+}
+
+.product__category {
+  margin-bottom: var(--space-xs);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.product__name {
+  margin-bottom: var(--space-s);
+  font-size: var(--font-size-l);
+}
+
+/* margin-top: auto schiebt Preis und Button nach unten → stehen in allen Karten auf einer Linie */
+.product__price {
+  margin-top: auto;
+  margin-bottom: var(--space-m);
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+}
+
+.product__details {
+  width: 100%;
+}
+
+/* ---------- Detail-Modal ---------- */
+.modal {
+  width: calc(100% - 2 * var(--space-m)); /* Handy: fast volle Breite */
+  max-width: 30rem;
+  padding: 0; /* Abstand innen über .modal__inner, sonst trifft ein Klick am Rand den <dialog> */
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-m);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+}
+
+/* ::backdrop = die Fläche hinter dem modalen Dialog */
+.modal::backdrop {
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.modal__inner {
+  position: relative;
+  padding: var(--space-l);
+}
+
+/* ✕ oben rechts, 44×44 px = gut zu treffen (auch mit dem Finger) */
+.modal__close {
+  position: absolute;
+  top: var(--space-s);
+  right: var(--space-s);
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: var(--font-size-l);
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+}
+
+.modal__close:hover {
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.modal__title {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-s);
+}
+
+.modal__text {
+  color: var(--color-text-muted);
+}
+
+.modal__price {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.modal__add {
+  width: 100%;
+}
+
+/* min-height: Platz ist schon reserviert → nichts springt, wenn die Meldung erscheint */
+.modal__status {
+  min-height: 1.6em;
+  margin: var(--space-s) 0 0;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-success);
+}
+
+/* ---------- Warenkorb-Zähler ---------- */
+.cart {
+  margin: 0;
+  padding: var(--space-s) var(--space-m);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
