@@ -41,10 +41,70 @@
   font-size: var(--font-size-l);
 }
 
-/* margin-top: auto schiebt den Preis nach unten → Preise stehen auf einer Linie */
+/* margin-top: auto schiebt Preis und Button nach unten → stehen in allen Karten auf einer Linie */
 .product__price {
   margin-top: auto;
-  margin-bottom: 0;
+  margin-bottom: var(--space-m);
   font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+}
+
+.product__details {
+  width: 100%;
+}
+
+/* ---------- Detail-Modal ---------- */
+.modal {
+  width: calc(100% - 2 * var(--space-m)); /* Handy: fast volle Breite */
+  max-width: 30rem;
+  padding: 0; /* Abstand innen über .modal__inner, sonst trifft ein Klick am Rand den <dialog> */
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-m);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+}
+
+/* ::backdrop = die Fläche hinter dem modalen Dialog */
+.modal::backdrop {
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.modal__inner {
+  position: relative;
+  padding: var(--space-l);
+}
+
+/* ✕ oben rechts, 44×44 px = gut zu treffen (auch mit dem Finger) */
+.modal__close {
+  position: absolute;
+  top: var(--space-s);
+  right: var(--space-s);
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: var(--font-size-l);
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+}
+
+.modal__close:hover {
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.modal__title {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-s);
+}
+
+.modal__text {
+  color: var(--color-text-muted);
+}
+
+.modal__price {
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
 }

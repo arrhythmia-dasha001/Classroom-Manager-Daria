@@ -56,6 +56,20 @@
 
       <!-- Die Karten erzeugt js/app.js aus den Daten in js/products.js -->
       <ul class="product-grid" id="produkte" aria-label="Produkte"></ul>
+
+      <!-- Detail-Modal: <dialog> mit showModal() bringt viel schon mit:
+           Esc schließt, der Rest der Seite ist gesperrt, der Fokus bleibt im Dialog.
+           Den Inhalt füllt js/app.js beim Öffnen. -->
+      <dialog class="modal" id="produkt-dialog" aria-labelledby="dialog-titel">
+        <div class="modal__inner">
+          <button class="modal__close" id="dialog-schliessen" type="button" aria-label="Schließen">✕</button>
+          <span class="product__icon" id="dialog-icon" aria-hidden="true"></span>
+          <p class="product__category" id="dialog-kategorie"></p>
+          <h2 class="modal__title" id="dialog-titel"></h2>
+          <p class="modal__text" id="dialog-beschreibung"></p>
+          <p class="modal__price" id="dialog-preis"></p>
+        </div>
+      </dialog>
     </main>
 
     <footer class="footer">
