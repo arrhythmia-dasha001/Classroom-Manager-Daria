@@ -7,6 +7,10 @@
 /* ---------- Seitenbereich ---------- */
 .page {
   padding-block: var(--space-l) var(--space-xl);
+  /* Mindestens so hoch wie der Bildschirm (minus Header).
+     Die Karten kommen erst per JavaScript. Ohne diese Zeile steht der Footer kurz unten
+     im Bild und springt dann weg → Layout Shift (Lighthouse CLS 0,124). */
+  min-height: calc(100vh - 4rem);
 }
 
 /* Titel links, später der Warenkorb rechts daneben */
