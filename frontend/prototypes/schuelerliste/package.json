@@ -1,0 +1,34 @@
+{
+  "name": "schuelerliste",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Schülerübersicht mit Filtern und Sortieren (LF10A UW4)",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write js tests",
+    "format:check": "prettier --check js tests",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "js/filter.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80
+      }
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^15.11.0",
+    "jest": "^30.5.2",
+    "prettier": "^3.10.1"
+  }
+}

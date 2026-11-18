@@ -4,7 +4,8 @@
   "private": true,
   "workspaces": [
     "frontend",
-    "backend"
+    "backend",
+    "frontend/prototypes/schuelerliste"
   ],
   "scripts": {
     "start:backend": "npm run dev --prefix backend",

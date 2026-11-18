@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
     <script src="../theme.js"></script>
+    <!-- type="module": app.js darf filter.js mit import laden (nur über Live Server, nicht file://) -->
+    <script type="module" src="js/app.js"></script>
   </head>
   <body>
     <header class="header">
@@ -50,9 +52,37 @@
         Alle Schüler:innen der Klassen FI24A und FI24B mit aktueller Anwesenheitsquote.
       </p>
 
+      <!-- Filtern und Sortieren ohne Neuladen der Seite (js/app.js) -->
+      <form class="filter" id="filter" role="search" aria-label="Schüler:innen filtern">
+        <div class="field">
+          <label class="field__label" for="suche">Suche nach Name</label>
+          <input class="field__input" id="suche" type="search" placeholder="z. B. Lena" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="klasse">Klasse</label>
+          <select class="field__input" id="klasse">
+            <option value="alle">Alle Klassen</option>
+            <option value="FI24A">FI24A</option>
+            <option value="FI24B">FI24B</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="sortierung">Sortieren nach</label>
+          <select class="field__input" id="sortierung">
+            <option value="name-asc">Name A–Z</option>
+            <option value="name-desc">Name Z–A</option>
+            <option value="anwesenheit-desc">Anwesenheit: höchste zuerst</option>
+            <option value="anwesenheit-asc">Anwesenheit: niedrigste zuerst</option>
+          </select>
+        </div>
+      </form>
+
+      <!-- Live-Region: Screenreader lesen die Trefferzahl vor, wenn sie sich ändert -->
+      <p class="filter__result" id="ergebnis" aria-live="polite"></p>
+
       <!-- Die "Produktliste": eine Liste von Karten. ul/li, weil es inhaltlich eine Aufzählung ist -->
       <ul class="student-grid" aria-label="Schülerinnen und Schüler">
-        <li class="student-grid__item">
+        <li class="student-grid__item" data-name="Max Mustermann" data-klasse="FI24A" data-anwesenheit="96">
           <article class="student">
             <span class="student__avatar" aria-hidden="true">MM</span>
             <div class="student__body">
@@ -63,7 +93,7 @@
             </div>
           </article>
         </li>
-        <li class="student-grid__item">
+        <li class="student-grid__item" data-name="Erika Mustermann" data-klasse="FI24A" data-anwesenheit="99">
           <article class="student">
             <span class="student__avatar" aria-hidden="true">EM</span>
             <div class="student__body">
@@ -74,7 +104,7 @@
             </div>
           </article>
         </li>
-        <li class="student-grid__item">
+        <li class="student-grid__item" data-name="John Doe" data-klasse="FI24B" data-anwesenheit="81">
           <article class="student">
             <span class="student__avatar" aria-hidden="true">JD</span>
             <div class="student__body">
@@ -85,7 +115,7 @@
             </div>
           </article>
         </li>
-        <li class="student-grid__item">
+        <li class="student-grid__item" data-name="Lena Schulz" data-klasse="FI24A" data-anwesenheit="93">
           <article class="student">
             <span class="student__avatar" aria-hidden="true">LS</span>
             <div class="student__body">
@@ -96,7 +126,7 @@
             </div>
           </article>
         </li>
-        <li class="student-grid__item">
+        <li class="student-grid__item" data-name="Mehmet Yılmaz" data-klasse="FI24A" data-anwesenheit="88">
           <article class="student">
             <span class="student__avatar" aria-hidden="true">MY</span>
             <div class="student__body">
@@ -107,7 +137,7 @@
             </div>
           </article>
         </li>
-        <li class="student-grid__item">
+        <li class="student-grid__item" data-name="Sophie Becker" data-klasse="FI24B" data-anwesenheit="97">
           <article class="student">
             <span class="student__avatar" aria-hidden="true">SB</span>
             <div class="student__body">
@@ -118,7 +148,7 @@
             </div>
           </article>
         </li>
-        <li class="student-grid__item">
+        <li class="student-grid__item" data-name="Tim Hoffmann" data-klasse="FI24A" data-anwesenheit="78">
           <article class="student">
             <span class="student__avatar" aria-hidden="true">TH</span>
             <div class="student__body">
@@ -129,7 +159,7 @@
             </div>
           </article>
         </li>
-        <li class="student-grid__item">
+        <li class="student-grid__item" data-name="Anna Kowalski" data-klasse="FI24B" data-anwesenheit="95">
           <article class="student">
             <span class="student__avatar" aria-hidden="true">AK</span>
             <div class="student__body">
