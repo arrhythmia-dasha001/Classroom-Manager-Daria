@@ -1,0 +1,30 @@
+/* =========================================================
+   layout.css – Schulshop: WO steht WAS?
+   Header und Footer kommen aus ../common.css.
+   Mobile First: Regeln ohne Media Query gelten fürs Handy.
+   ========================================================= */
+
+/* ---------- Seitenbereich ---------- */
+.page {
+  padding-block: var(--space-l) var(--space-xl);
+}
+
+/* Titel links, später der Warenkorb rechts daneben */
+.page__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-m);
+  margin-bottom: var(--space-l);
+}
+
+.page__title {
+  margin-bottom: var(--space-s);
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+}
+
+.page__intro {
+  margin: 0;
+  color: var(--color-text-muted);
+}
