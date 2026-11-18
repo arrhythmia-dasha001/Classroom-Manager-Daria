@@ -56,10 +56,16 @@ Zusätzlich: `clamp()` für die Überschrift und eine Container Query für die K
 
 ## 1.2 ESLint und Prettier
 
-Im Ordner `schuelerliste`:
+Die Schülerliste ist ein npm-Workspace wie `frontend` und `backend` (siehe `package.json` im Hauptordner).
+Deshalb einmal im **Hauptordner** des Projekts installieren, die Pakete landen im gemeinsamen `node_modules`:
 
 ```
-npm install            # einmal: Werkzeuge installieren
+npm install
+```
+
+Danach im Ordner `schuelerliste`:
+
+```
 npm run lint           # ESLint prüft den Code (eslint.config.js)
 npm run format         # Prettier formatiert js/ und tests/ (.prettierrc.json)
 npm run format:check   # nur prüfen, nichts ändern
