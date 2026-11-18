@@ -1,6 +1,6 @@
-// app.js – baut die Produktliste aus den Daten in products.js,
+// app.js – lädt die Produkte vom Server, baut die Liste,
 // öffnet beim Klick auf „Details“ das Modal und zählt den Warenkorb.
-import { products, formatPrice, findProduct } from "./products.js";
+import { fetchProducts, formatPrice } from "./products.js";
 
 const list = document.getElementById("produkte");
 const dialog = document.getElementById("produkt-dialog");
@@ -53,7 +53,14 @@ function createCard(product) {
   return item;
 }
 
-list.append(...products.map(createCard));
+let products = []; // wird gefüllt, sobald die Antwort vom Server da ist
+
+async function loadProducts() {
+  products = await fetchProducts();
+  list.replaceChildren(...products.map(createCard));
+}
+
+loadProducts();
 
 // ---------- 2. Detail-Modal ----------
 
@@ -78,7 +85,8 @@ function openDialog(product, opener) {
 list.addEventListener("click", (event) => {
   const button = event.target.closest("[data-id]");
   if (!button) return; // Klick war nicht auf einem Details-Button
-  openDialog(findProduct(Number(button.dataset.id)), button);
+  const product = products.find((item) => item.id === Number(button.dataset.id));
+  openDialog(product, button);
 });
 
 closeButton.addEventListener("click", () => dialog.close());
