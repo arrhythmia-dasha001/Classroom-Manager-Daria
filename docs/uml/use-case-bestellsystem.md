@@ -33,3 +33,9 @@ Bestell-System für den Schulshop: Schüler:innen und Lehrkräfte bestellen Heft
 5. Das System speichert die Bestellung und zeigt eine Bestätigung mit Bestellnummer.
 
 **Nachbedingung:** Die Bestellung ist gespeichert und bezahlt, der Lagerist sieht sie in seiner Liste, der Warenkorb ist leer.
+
+## 1.4 Reflexion
+
+(1) include nimmt man, wenn ein Schritt immer dazugehört (Bestellen ohne Bezahlen geht nicht). extend nimmt man für etwas, das nur manchmal passiert, unter einer Bedingung (Gutschein nur, wenn man einen hat).
+
+(2) Ein Use-Case beschreibt ein Ziel aus Sicht des Nutzers, zum Beispiel „Anmelden“. Wie das Passwort gespeichert wird, merkt der Nutzer gar nicht. Das ist ein technischer Schritt und gehört in die Planung des Programms, nicht ins Use-Case-Diagramm.
