@@ -62,3 +62,11 @@ AUSGABE summe
 ```
 
 Test mit 3 Monaten (250, 320 und 300 kWh): 99,50 + 112,80 + 106,50 = 318,80 €
+
+## 1.4 Reflexion
+
+**(1) Warum keine GOTO-Sprünge?**
+Jeder Block hat nur einen Eingang und einen Ausgang. Ein Sprung irgendwohin passt da nicht rein und macht das Programm unübersichtlich. Man braucht ihn auch nicht, Sequenz, Auswahl und Wiederholung reichen.
+
+**(2) Vorteil gegenüber Drauflos-Codieren?**
+Man überlegt erst die Logik und nicht die Syntax. Fragen wie „Gilt der Rabatt auch für die Grundgebühr?“ oder „>= oder >?“ klärt man schon vorher. Andere können das Struktogramm lesen, auch ohne die Programmiersprache zu kennen, und danach schreibt man den Code fast Zeile für Zeile ab.
