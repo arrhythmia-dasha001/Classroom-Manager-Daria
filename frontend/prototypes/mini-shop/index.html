@@ -70,6 +70,9 @@
         <button class="button button--primary" id="erneut" type="button">Erneut versuchen</button>
       </div>
 
+      <!-- Ladezustand für Screenreader (die grauen Skeleton-Karten sieht man nur) -->
+      <p class="visually-hidden" id="lade-status" role="status"></p>
+
       <!-- Die Karten erzeugt js/app.js aus den Daten vom JSON Server -->
       <ul class="product-grid" id="produkte" aria-label="Produkte"></ul>
 

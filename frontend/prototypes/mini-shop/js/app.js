@@ -10,6 +10,7 @@ const status = document.getElementById("dialog-status");
 const cartCount = document.getElementById("warenkorb-anzahl");
 const errorBox = document.getElementById("fehler");
 const retryButton = document.getElementById("erneut");
+const loadStatus = document.getElementById("lade-status");
 
 // ---------- 1. Produktliste ----------
 
@@ -72,16 +73,45 @@ function errorText(error) {
   return "Der Server ist nicht erreichbar. Prüfe die Verbindung und versuche es noch einmal.";
 }
 
+// Skeleton: graue Platzhalter-Karten in derselben Größe wie die echten.
+// So sieht man, dass etwas lädt, und die Seite springt nicht, wenn die Daten kommen.
+function createSkeletonCard() {
+  const item = document.createElement("li");
+  item.className = "product-grid__item";
+  item.setAttribute("aria-hidden", "true"); // nur Optik, der Screenreader bekommt loadStatus
+  const card = document.createElement("div");
+  card.className = "product product--skeleton";
+  for (const part of ["icon", "category", "name", "price", "button"]) {
+    const block = document.createElement("span");
+    block.className = `skeleton skeleton--${part}`;
+    card.append(block);
+  }
+  item.append(card);
+  return item;
+}
+
+function showSkeleton() {
+  const placeholders = Array.from({ length: 8 }, createSkeletonCard);
+  list.replaceChildren(...placeholders);
+  list.setAttribute("aria-busy", "true"); // Liste wird gerade gefüllt
+  loadStatus.textContent = "Produkte werden geladen …";
+}
+
 async function loadProducts() {
   errorBox.hidden = true;
+  showSkeleton();
   try {
     products = await fetchProducts();
     list.replaceChildren(...products.map(createCard));
+    loadStatus.textContent = `${products.length} Produkte geladen.`;
   } catch (error) {
+    loadStatus.textContent = "";
     // Statt einer leeren Seite: Meldung + Button zum erneuten Laden
     list.replaceChildren();
     errorBox.querySelector(".notice__text").textContent = errorText(error);
     errorBox.hidden = false;
+  } finally {
+    list.setAttribute("aria-busy", "false"); // finally: läuft immer, ob Erfolg oder Fehler
   }
 }
 
