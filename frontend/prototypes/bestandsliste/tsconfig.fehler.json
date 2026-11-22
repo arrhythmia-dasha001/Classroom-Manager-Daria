@@ -1,0 +1,9 @@
+{
+  // nur für Übung 1.4: gleiche Einstellungen, aber prüft den Ordner uebung
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "uebung",
+    "noEmit": true
+  },
+  "include": ["uebung"]
+}

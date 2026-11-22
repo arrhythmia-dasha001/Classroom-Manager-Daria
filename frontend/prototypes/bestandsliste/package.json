@@ -5,6 +5,7 @@
   "description": "Bestandsliste von Frau Lehmann: Migration von JavaScript nach TypeScript",
   "scripts": {
     "check": "tsc --noEmit",
+    "check:fehler": "tsc -p tsconfig.fehler.json",
     "build": "tsc",
     "start": "node dist/bestandsliste.js"
   },
