@@ -1,10 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ProductList from './components/ProductList.jsx'
 import { products } from './data/products.js'
 
 function App() {
   // State: React merkt sich die Favoriten und zeichnet bei Änderung neu
-  const [favs, setFavs] = useState([])
+  // beim Start laden: die Funktion läuft nur beim ersten Rendern
+  // (mit useEffect + [] hat der Speicher-Effekt die Favoriten vorher mit [] überschrieben)
+  const [favs, setFavs] = useState(() => JSON.parse(localStorage.getItem('favs') ?? '[]'))
+
+  // bei Änderung speichern
+  useEffect(() => {
+    localStorage.setItem('favs', JSON.stringify(favs))
+  }, [favs])
 
   function toggleFav(id) {
     // nicht favs.push(...): immer ein neues Array an den Setter geben
