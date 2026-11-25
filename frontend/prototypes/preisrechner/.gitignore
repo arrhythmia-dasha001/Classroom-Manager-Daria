@@ -1,0 +1,3 @@
+node_modules/
+# wird mit npm run docs erzeugt
+docs/

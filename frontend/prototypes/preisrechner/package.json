@@ -1,0 +1,13 @@
+{
+  "name": "preisrechner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kleine Preis-Bibliothek der Küstenbyte GmbH, dokumentiert mit JSDoc",
+  "type": "module",
+  "scripts": {
+    "docs": "jsdoc src README.md -d docs"
+  },
+  "devDependencies": {
+    "jsdoc": "^4.0.5"
+  }
+}
