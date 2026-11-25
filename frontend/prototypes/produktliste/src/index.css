@@ -13,3 +13,26 @@ body {
   margin: 0 auto;
   padding: 2rem 1rem;
 }
+
+.liste {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.kachel {
+  background: #fff;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.kachel h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.kachel p {
+  margin: 0;
+  font-weight: 600;
+}
