@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 // Eine Kachel – wird für jedes Produkt wiederverwendet.
 // Alle Werte kommen als Props von außen und werden nur gelesen.
 function ProductCard({ id, name, price, isFav, onToggleFav }) {
@@ -25,4 +27,5 @@ function ProductCard({ id, name, price, isFav, onToggleFav }) {
   )
 }
 
-export default ProductCard
+// memo: Kachel wird nur neu gezeichnet, wenn sich ihre Props ändern
+export default memo(ProductCard)
