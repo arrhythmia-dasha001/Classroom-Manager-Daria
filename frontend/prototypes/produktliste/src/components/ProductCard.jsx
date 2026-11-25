@@ -1,6 +1,6 @@
 // Eine Kachel – wird für jedes Produkt wiederverwendet.
-// name und price kommen als Props von außen und werden nur gelesen.
-function ProductCard({ name, price }) {
+// Alle Werte kommen als Props von außen und werden nur gelesen.
+function ProductCard({ id, name, price, isFav, onToggleFav }) {
   const formattedPrice = price.toLocaleString('de-DE', {
     style: 'currency',
     currency: 'EUR',
@@ -8,7 +8,18 @@ function ProductCard({ name, price }) {
 
   return (
     <div className="kachel">
-      <h3>{name}</h3>
+      <div className="kachel-kopf">
+        <h3>{name}</h3>
+        <button
+          type="button"
+          className="herz"
+          aria-pressed={isFav}
+          aria-label={`${name} als Favorit`}
+          onClick={() => onToggleFav(id)}
+        >
+          {isFav ? '♥' : '♡'}
+        </button>
+      </div>
       <p>{formattedPrice}</p>
     </div>
   )
